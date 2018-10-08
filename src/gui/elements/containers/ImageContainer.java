@@ -1,6 +1,9 @@
 package gui.elements.containers;
 
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.swing.JPanel;
@@ -8,9 +11,10 @@ import javax.swing.JPanel;
 import factories.FactoryProducer;
 import factories.SuperFactory;
 import interfaces.GUIElement;
+import interfaces.ImageBar;
 import models.ViewModel;
 
-public class ImageContainer extends JPanel implements GUIElement{
+public class ImageContainer extends JPanel implements ImageBar{
 	private ViewModel viewModel;
 	
 	private SuperFactory guiElementFactory;
@@ -29,15 +33,7 @@ public class ImageContainer extends JPanel implements GUIElement{
 	}
 	
 	private void handleProvidedFiles() {
-		File[] selectedFiles = viewModel.getSelectedFiles();
-		for(int i = 0; i < selectedFiles.length; i++) {
-			File selectedFile = selectedFiles[i];
-			if(selectedFile.isDirectory()) {
-				File[] filesFromDirectory = selectedFile.listFiles();
-				selectedFiles = resizeAndFill(selectedFiles, filesFromDirectory);
-				selectedFile = selectedFiles[i + 1];
-			}
-		}
+			
 	}
 	
 	private File[] resizeAndFill(File[] files, File[] filesFromDirectory) {
@@ -48,5 +44,19 @@ public class ImageContainer extends JPanel implements GUIElement{
 			combinedFiles[i] = i < oldNumberOfFiles ? files[i] : filesFromDirectory[i];
 		}
 		return combinedFiles;
-	}
+	}	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+

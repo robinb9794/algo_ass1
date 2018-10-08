@@ -5,6 +5,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import controllers.ImageContainerManager;
 import factories.FactoryProducer;
 import factories.SuperFactory;
 import interfaces.GUIElement;
@@ -15,7 +16,7 @@ public class ImageChooser extends JFileChooser implements GUIElement{
 	
 	private SuperFactory guiElementFactory;
 	
-	private GUIElement imageContainer;
+	private ImageContainerManager imageContainerManager;
 	
 	public ImageChooser(ViewModel viewModel) {
 		this.viewModel = viewModel;
@@ -41,7 +42,7 @@ public class ImageChooser extends JFileChooser implements GUIElement{
 	
 	private void provideFiles(File[] selectedFiles) {
 		viewModel.setSelectedFiles(selectedFiles);
-		this.imageContainer = guiElementFactory.getGUIElement("ImageContainer");
-		imageContainer.init();
+		this.imageContainerManager = new ImageContainerManager(viewModel);
+		this.imageContainerManager.handleProvidedFiles();
 	}
 }

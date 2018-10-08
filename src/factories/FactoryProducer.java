@@ -7,8 +7,8 @@ public class FactoryProducer extends GUIManager{
 		switch(type) {
 		case "GUIElement":
 			return new GUIElementFactory(viewModel);
-		case "ElementAction":
-			return new ElementActionFactory();
+		case "SingleAction":
+			return new SingleActionFactory();
 		}
 		return null;
 	}

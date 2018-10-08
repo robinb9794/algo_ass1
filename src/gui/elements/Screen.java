@@ -9,7 +9,7 @@ import interfaces.bar.ImageDisplay;
 public class Screen extends JComponent implements ImageDisplay{
 	@Override
 	public void paintComponent(Graphics g) {
-		
+		super.paintComponent(g);
 	}
 	
 	@Override

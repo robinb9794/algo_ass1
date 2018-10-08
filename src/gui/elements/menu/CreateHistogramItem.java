@@ -7,15 +7,15 @@ import factories.SuperFactory;
 import interfaces.GUIElement;
 
 public class CreateHistogramItem extends JMenuItem implements GUIElement{
-	private SuperFactory elementActionFactory;
+	private SuperFactory singleActionFactory;
 	
 	public CreateHistogramItem() {
-		this.elementActionFactory = FactoryProducer.getFactory("ElementAction");				
+		this.singleActionFactory = FactoryProducer.getFactory("SingleAction");				
 	}
 	
 	@Override
 	public void init() {
 		setText("Create histogram");
-		addActionListener(elementActionFactory.getElementAction("CreateHistogram"));
+		addActionListener(singleActionFactory.getSingleAction("CreateHistogram"));
 	}
 }

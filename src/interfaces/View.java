@@ -5,4 +5,5 @@ public interface View {
 	void addElement(String position, GUIElement guiElement);
 	void setMenuBar(GUIElement menuBar);
 	void packAndShow();
+	void reorder();
 }

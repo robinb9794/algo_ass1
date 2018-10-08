@@ -1,6 +1,7 @@
 package factories;
 
 import gui.elements.Screen;
+import gui.elements.bar.ClickableImage;
 import gui.elements.bar.ImageField;
 import gui.elements.containers.ButtonContainer;
 import gui.elements.containers.ImageContainer;
@@ -11,7 +12,7 @@ import gui.elements.menu.ImageChooser;
 import gui.elements.menu.Menu;
 import interfaces.GUIElement;
 import models.ViewModel;
-import interfaces.ElementAction;
+import interfaces.SingleAction;
 
 public class GUIElementFactory extends SuperFactory{
 	private ViewModel viewModel;
@@ -36,9 +37,11 @@ public class GUIElementFactory extends SuperFactory{
 		case "ImageChooser":
 			return new ImageChooser(viewModel);
 		case "ImageContainer":
-			return new ImageContainer(viewModel);
-		case "ClickableImage":
+			return new ImageContainer();
+		case "ImageField":
 			return new ImageField();
+		case "ClickableImage":
+			return new ClickableImage();
 		case "ButtonContainer":
 			return new ButtonContainer();
 		}
@@ -46,7 +49,7 @@ public class GUIElementFactory extends SuperFactory{
 	}
 
 	@Override
-	public ElementAction getElementAction(String type) {
+	public SingleAction getSingleAction(String type) {
 		return null;
 	}
 }

@@ -1,9 +1,9 @@
 package factories;
 
 import interfaces.GUIElement;
-import interfaces.ElementAction;
+import interfaces.SingleAction;
 
 public abstract class SuperFactory {
 	public abstract GUIElement getGUIElement(String type);
-	public abstract ElementAction getElementAction(String type);
+	public abstract SingleAction getSingleAction(String type);
 }

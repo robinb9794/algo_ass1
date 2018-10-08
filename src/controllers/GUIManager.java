@@ -11,8 +11,8 @@ import interfaces.bar.ImageDisplay;
 import models.ViewModel;
 
 public class GUIManager {
-	protected static ViewModel viewModel;
 	protected static View gui;
+	protected static ViewModel viewModel;
 	
 	private SuperFactory guiElementFactory;
 	
@@ -23,8 +23,8 @@ public class GUIManager {
 	public GUIManager() {}
 	
 	public GUIManager(ViewModel viewModel) {
-		this.viewModel = viewModel;
 		this.gui = new GUI(viewModel);
+		this.viewModel = viewModel;
 		this.guiElementFactory = FactoryProducer.getFactory("GUIElement");
 	}
 	

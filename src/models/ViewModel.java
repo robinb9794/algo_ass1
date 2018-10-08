@@ -2,7 +2,11 @@ package models;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+import gui.elements.bar.ClickableImage;
+import interfaces.bar.DisplayedImage;
 
 public class ViewModel {
 	private String guiTitle;

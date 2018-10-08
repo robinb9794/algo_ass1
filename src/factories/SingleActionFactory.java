@@ -1,18 +1,19 @@
 package factories;
 
-import controllers.actions.menu.ChooseImagesActionHandler;
-import controllers.actions.menu.CreateHistogramActionHandler;
 import interfaces.GUIElement;
-import interfaces.ElementAction;
+import controllers.actions.ChooseImagesActionHandler;
+import controllers.actions.CreateHistogramActionHandler;
+import gui.elements.bar.ClickableImage;
+import interfaces.SingleAction;
 
-public class ElementActionFactory extends SuperFactory{
+public class SingleActionFactory extends SuperFactory{
 	@Override
 	public GUIElement getGUIElement(String type) {
 		return null;
 	}
 
 	@Override
-	public ElementAction getElementAction(String type) {
+	public SingleAction getSingleAction(String type) {
 		switch(type) {
 		case "ChooseImages":
 			return new ChooseImagesActionHandler();

@@ -43,4 +43,10 @@ public class GUI extends JFrame implements View{
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+	
+	@Override
+	public void reorder() {
+		validate();
+		//repaint();
+	}
 }

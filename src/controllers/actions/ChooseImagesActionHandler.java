@@ -1,13 +1,13 @@
-package controllers.actions.menu;
+package controllers.actions;
 
 import java.awt.event.ActionEvent;
 
 import factories.FactoryProducer;
 import factories.SuperFactory;
-import interfaces.ElementAction;
+import interfaces.SingleAction;
 import interfaces.GUIElement;
 
-public class ChooseImagesActionHandler implements ElementAction {
+public class ChooseImagesActionHandler implements SingleAction {
 	private SuperFactory guiElementFactory;
 	
 	private GUIElement imageChooser;

@@ -7,15 +7,15 @@ import factories.SuperFactory;
 import interfaces.GUIElement;
 
 public class ChooseImagesItem extends JMenuItem implements GUIElement{
-	private SuperFactory elementActionFactory;
+	private SuperFactory singleActionFactory;
 	
 	public ChooseImagesItem() {
-		this.elementActionFactory = FactoryProducer.getFactory("ElementAction");				
+		this.singleActionFactory = FactoryProducer.getFactory("SingleAction");				
 	}
 	
 	@Override
 	public void init() {
 		setText("Choose images");
-		addActionListener(elementActionFactory.getElementAction("ChooseImages"));
+		addActionListener(singleActionFactory.getSingleAction("ChooseImages"));
 	}
 }

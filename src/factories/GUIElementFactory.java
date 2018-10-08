@@ -1,6 +1,7 @@
 package factories;
 
 import gui.elements.Screen;
+import gui.elements.bar.ImageField;
 import gui.elements.containers.ButtonContainer;
 import gui.elements.containers.ImageContainer;
 import gui.elements.containers.MenuItemContainer;
@@ -36,6 +37,8 @@ public class GUIElementFactory extends SuperFactory{
 			return new ImageChooser(viewModel);
 		case "ImageContainer":
 			return new ImageContainer(viewModel);
+		case "ClickableImage":
+			return new ImageField();
 		case "ButtonContainer":
 			return new ButtonContainer();
 		}

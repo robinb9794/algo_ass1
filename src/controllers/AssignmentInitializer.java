@@ -1,3 +1,4 @@
+package controllers;
 import controllers.GUIManager;
 import models.ViewModel;
 

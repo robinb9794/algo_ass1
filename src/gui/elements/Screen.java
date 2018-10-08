@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-import interfaces.ImageDisplay;
+import interfaces.bar.ImageDisplay;
 
 public class Screen extends JComponent implements ImageDisplay{
 	@Override

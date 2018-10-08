@@ -43,6 +43,6 @@ public class ImageChooser extends JFileChooser implements GUIElement{
 	private void provideFiles(File[] selectedFiles) {
 		viewModel.setSelectedFiles(selectedFiles);
 		this.imageContainerManager = new ImageContainerManager(viewModel);
-		this.imageContainerManager.handleProvidedFiles();
+		this.imageContainerManager.startWork();
 	}
 }

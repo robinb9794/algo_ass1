@@ -6,13 +6,13 @@ import factories.FactoryProducer;
 import factories.SuperFactory;
 import gui.GUI;
 import interfaces.GUIElement;
-import interfaces.ImageDisplay;
 import interfaces.View;
+import interfaces.bar.ImageDisplay;
 import models.ViewModel;
 
 public class GUIManager {
 	protected static ViewModel viewModel;
-	private View gui;
+	protected static View gui;
 	
 	private SuperFactory guiElementFactory;
 	

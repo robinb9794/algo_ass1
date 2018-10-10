@@ -16,6 +16,6 @@ public class ChooseImagesItem extends JMenuItem implements GUIElement{
 	@Override
 	public void init() {
 		setText("Choose images");
-		addActionListener(singleActionFactory.getSingleAction("ChooseImages"));
+		addActionListener(singleActionFactory.getMenuAction("ChooseImages"));
 	}
 }

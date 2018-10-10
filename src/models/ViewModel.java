@@ -7,6 +7,7 @@ import java.util.List;
 
 import gui.elements.bar.ClickableImage;
 import interfaces.bar.DisplayedImage;
+import interfaces.bar.ImageBar;
 
 public class ViewModel {
 	private String guiTitle;
@@ -16,11 +17,15 @@ public class ViewModel {
 	private File[] selectedFiles;
 	private List<LoadedImage> loadedImages;
 	
+	private boolean imagesAreAddedToContainer;
+	private ImageBar imageBar;
+	
 	public ViewModel(String guiTitle, int guiWidth, int guiHeight) {
 		this.guiTitle = guiTitle;
 		this.guiWidth = guiWidth;
 		this.guiHeight = guiHeight;
 		this.loadedImages = new ArrayList<LoadedImage>();
+		this.imagesAreAddedToContainer = false;
 	}
 	
 	public String getGUITitle() {
@@ -65,5 +70,21 @@ public class ViewModel {
 	
 	public void addLoadedImage(LoadedImage loadedImage) {
 		this.loadedImages.add(loadedImage);
+	}
+	
+	public synchronized boolean imagesAreAddedToContainer() {
+		return this.imagesAreAddedToContainer;
+	}
+	
+	public void setImagesAreAddedToContainer(boolean imagesAreAddedToContainer) {
+		this.imagesAreAddedToContainer = imagesAreAddedToContainer;
+	}
+	
+	public void setImageBar(ImageBar imageBar) {
+		this.imageBar = imageBar;
+	}
+	
+	public ImageBar getImageBar() {
+		return this.imageBar;
 	}
 }

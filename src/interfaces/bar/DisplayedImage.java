@@ -1,9 +1,8 @@
 package interfaces.bar;
 
-import javax.swing.ImageIcon;
-
 import interfaces.GUIElement;
+import models.LoadedImage;
 
 public interface DisplayedImage extends GUIElement{
-	void addImageIcon(ImageIcon icon);
+	void addImageIconFromLoadedImage(LoadedImage loadedImage);
 }

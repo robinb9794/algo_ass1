@@ -47,6 +47,5 @@ public class GUI extends JFrame implements View{
 	@Override
 	public void reorder() {
 		validate();
-		//repaint();
 	}
 }

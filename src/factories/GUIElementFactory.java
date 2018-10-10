@@ -1,8 +1,10 @@
 package factories;
 
+import gui.elements.LoadingWindow;
 import gui.elements.Screen;
 import gui.elements.bar.ClickableImage;
 import gui.elements.bar.ImageField;
+import gui.elements.bar.ImageScroller;
 import gui.elements.containers.ButtonContainer;
 import gui.elements.containers.ImageContainer;
 import gui.elements.containers.MenuItemContainer;
@@ -11,8 +13,8 @@ import gui.elements.menu.CreateHistogramItem;
 import gui.elements.menu.ImageChooser;
 import gui.elements.menu.Menu;
 import interfaces.GUIElement;
+import interfaces.actions.SingleAction;
 import models.ViewModel;
-import interfaces.SingleAction;
 
 public class GUIElementFactory extends SuperFactory{
 	private ViewModel viewModel;
@@ -38,10 +40,14 @@ public class GUIElementFactory extends SuperFactory{
 			return new ImageChooser(viewModel);
 		case "ImageContainer":
 			return new ImageContainer();
+		case "ImageScroller":
+			return new ImageScroller(viewModel);
+		case "LoadingWindow":
+			return new LoadingWindow();
 		case "ImageField":
 			return new ImageField();
 		case "ClickableImage":
-			return new ClickableImage();
+			return new ClickableImage(viewModel);
 		case "ButtonContainer":
 			return new ButtonContainer();
 		}
@@ -49,7 +55,7 @@ public class GUIElementFactory extends SuperFactory{
 	}
 
 	@Override
-	public SingleAction getSingleAction(String type) {
+	public SingleAction getMenuAction(String type) {
 		return null;
 	}
 }

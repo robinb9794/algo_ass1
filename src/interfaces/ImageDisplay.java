@@ -1,6 +1,4 @@
-package interfaces.bar;
-
-import interfaces.GUIElement;
+package interfaces;
 
 public interface ImageDisplay extends GUIElement{
 	int getScreenWidth();

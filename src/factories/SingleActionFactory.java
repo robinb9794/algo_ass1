@@ -1,10 +1,9 @@
 package factories;
 
 import interfaces.GUIElement;
+import interfaces.actions.SingleAction;
 import controllers.actions.ChooseImagesActionHandler;
 import controllers.actions.CreateHistogramActionHandler;
-import gui.elements.bar.ClickableImage;
-import interfaces.SingleAction;
 
 public class SingleActionFactory extends SuperFactory{
 	@Override
@@ -13,7 +12,7 @@ public class SingleActionFactory extends SuperFactory{
 	}
 
 	@Override
-	public SingleAction getSingleAction(String type) {
+	public SingleAction getMenuAction(String type) {
 		switch(type) {
 		case "ChooseImages":
 			return new ChooseImagesActionHandler();

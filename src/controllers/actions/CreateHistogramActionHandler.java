@@ -2,7 +2,7 @@ package controllers.actions;
 
 import java.awt.event.ActionEvent;
 
-import interfaces.SingleAction;
+import interfaces.actions.SingleAction;
 
 public class CreateHistogramActionHandler implements SingleAction{
 	@Override

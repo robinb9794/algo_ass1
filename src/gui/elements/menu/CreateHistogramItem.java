@@ -16,6 +16,6 @@ public class CreateHistogramItem extends JMenuItem implements GUIElement{
 	@Override
 	public void init() {
 		setText("Create histogram");
-		addActionListener(singleActionFactory.getSingleAction("CreateHistogram"));
+		addActionListener(singleActionFactory.getMenuAction("CreateHistogram"));
 	}
 }

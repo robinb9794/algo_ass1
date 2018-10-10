@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 
 import factories.FactoryProducer;
 import factories.SuperFactory;
-import interfaces.SingleAction;
 import interfaces.GUIElement;
+import interfaces.actions.SingleAction;
 
 public class ChooseImagesActionHandler implements SingleAction {
 	private SuperFactory guiElementFactory;

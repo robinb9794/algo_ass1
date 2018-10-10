@@ -1,13 +1,13 @@
 package gui.elements.bar;
 
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import factories.FactoryProducer;
 import factories.SuperFactory;
 import interfaces.bar.DisplayedImage;
+import models.LoadedImage;
 
 public class ImageField extends JPanel implements DisplayedImage{	
 	private SuperFactory guiElementFactory;
@@ -27,7 +27,7 @@ public class ImageField extends JPanel implements DisplayedImage{
 	}
 
 	@Override
-	public void addImageIcon(ImageIcon icon) {
-		clickableImage.addImageIcon(icon);
+	public void addImageIconFromLoadedImage(LoadedImage loadedImage) {
+		clickableImage.addImageIconFromLoadedImage(loadedImage);
 	}
 }

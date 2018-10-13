@@ -13,7 +13,6 @@ import gui.elements.menu.CreateHistogramItem;
 import gui.elements.menu.ImageChooser;
 import gui.elements.menu.Menu;
 import interfaces.GUIElement;
-import interfaces.actions.SingleAction;
 import models.ViewModel;
 
 public class GUIElementFactory extends SuperFactory{
@@ -51,11 +50,6 @@ public class GUIElementFactory extends SuperFactory{
 		case "ButtonContainer":
 			return new ButtonContainer();
 		}
-		return null;
-	}
-
-	@Override
-	public SingleAction getMenuAction(String type) {
 		return null;
 	}
 }

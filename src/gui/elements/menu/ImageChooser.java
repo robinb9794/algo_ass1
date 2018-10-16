@@ -5,22 +5,15 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import controllers.ImageContainerManager;
-import factories.FactoryProducer;
-import factories.SuperFactory;
 import interfaces.GUIElement;
 import models.ViewModel;
+import workers.GUIManager;
 
 public class ImageChooser extends JFileChooser implements GUIElement{
 	private ViewModel viewModel;
 	
-	private SuperFactory guiElementFactory;
-	
-	private ImageContainerManager imageContainerManager;
-	
 	public ImageChooser(ViewModel viewModel) {
 		this.viewModel = viewModel;
-		this.guiElementFactory = FactoryProducer.getFactory("GUIElement");
 	}
 	
 	public void init() {
@@ -42,7 +35,6 @@ public class ImageChooser extends JFileChooser implements GUIElement{
 	
 	private void provideFiles(File[] selectedFiles) {
 		viewModel.setSelectedFiles(selectedFiles);
-		this.imageContainerManager = new ImageContainerManager(viewModel);
-		this.imageContainerManager.startWork();
+		GUIManager.initImageContainer();
 	}
 }

@@ -6,4 +6,5 @@ public interface View {
 	void setMenuBar(GUIElement menuBar);
 	void packAndShow();
 	void reorder();
+	void reloadScreen();
 }

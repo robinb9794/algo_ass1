@@ -17,7 +17,15 @@ public class LoadedImage {
 		this.index = index;
 	}	
 	
+	public int[] getGrabbedPixels() {
+		return this.grabbedPixels;
+	}
+	
 	public ImageIcon getIcon() {
 		return this.icon;
+	}
+	
+	public int getIndex() {
+		return this.index;
 	}
 }

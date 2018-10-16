@@ -13,12 +13,15 @@ import gui.elements.menu.CreateHistogramItem;
 import gui.elements.menu.ImageChooser;
 import gui.elements.menu.Menu;
 import interfaces.GUIElement;
+import interfaces.View;
 import models.ViewModel;
 
 public class GUIElementFactory extends SuperFactory{
+	private View gui;
 	private ViewModel viewModel;
 	
-	public GUIElementFactory(ViewModel viewModel) {
+	public GUIElementFactory(View gui, ViewModel viewModel) {
+		this.gui = gui;
 		this.viewModel = viewModel;
 	}
 	
@@ -26,7 +29,7 @@ public class GUIElementFactory extends SuperFactory{
 	public GUIElement getGUIElement(String type) {
 		switch(type) {
 		case "Screen":
-			return new Screen();
+			return new Screen(viewModel);
 		case "Menu":
 			return new Menu();
 		case "MenuItemContainer":
@@ -46,10 +49,16 @@ public class GUIElementFactory extends SuperFactory{
 		case "ImageField":
 			return new ImageField();
 		case "ClickableImage":
-			return new ClickableImage(viewModel);
+			return new ClickableImage(gui, viewModel);
 		case "ButtonContainer":
 			return new ButtonContainer();
 		}
+		return null;
+	}
+
+	@Override
+	public GUIElement getButtonField(String type) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

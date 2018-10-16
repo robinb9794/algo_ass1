@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 
 import interfaces.GUIElement;
 import interfaces.View;
@@ -47,5 +48,10 @@ public class GUI extends JFrame implements View{
 	@Override
 	public void reorder() {
 		validate();
+	}
+	
+	@Override
+	public void reloadScreen() {
+		repaint();
 	}
 }

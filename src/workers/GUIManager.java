@@ -31,18 +31,10 @@ public class GUIManager {
 	
 	public static void startWork() {
 		buildGUI();
-		initModelValues();
 	}
 	
 	private static void buildGUI() {
-		gui.init();
-
-		ButtonContainerManager.init();
-		ButtonContainerManager.startWork();
-				
-		screen = (ImageDisplay) guiElementFactory.getGUIElement("Screen");
-		screen.init();
-		gui.addElement(BorderLayout.CENTER, screen);	
+		gui.init();		
 		
 		menuBar = guiElementFactory.getGUIElement("Menu");
 		menuBar.init();
@@ -51,14 +43,27 @@ public class GUIManager {
 		gui.packAndShow();				
 	}
 	
-	private static void initModelValues() {
-		viewModel.setScreen(screen);
-		viewModel.initPixels();
-		viewModel.initMemoryImageSource();
+	public static void initButtonContainer() {
+		ButtonContainerManager.init();
+		ButtonContainerManager.startWork();
+	}
+	
+	public static void initScreen() {
+		screen = (ImageDisplay) guiElementFactory.getGUIElement("Screen");
+		screen.init();
+		gui.addElement(BorderLayout.CENTER, screen);
+		gui.reorder();	
+		setScreenValues();
 	}
 	
 	public static void initImageContainer() {
 		ImageContainerManager.init();
 		ImageContainerManager.startWork();
+	}
+	
+	private static void setScreenValues() {
+		viewModel.setScreen(screen);
+		viewModel.initPixels();
+		viewModel.initMemoryImageSource();
 	}
 }

@@ -2,23 +2,48 @@ package workers;
 
 import java.awt.BorderLayout;
 
+import gui.elements.buttons.SuperButton;
+import interfaces.LoadingScreen;
 import interfaces.buttons.ButtonField;
 import interfaces.buttons.ButtonSelection;
 
-public class ButtonContainerManager extends GUIManager{		
+public class ButtonContainerManager extends GUIManager{
+	private static LoadingScreen loadingScreen;
 	private static ButtonSelection buttonSelection;
 	
 	public static void init() {
+		loadingScreen = (LoadingScreen) guiElementFactory.getGUIElement("LoadingWindow");
 		buttonSelection = (ButtonSelection) guiElementFactory.getGUIElement("ButtonContainer");
 		buttonSelection.init();
 	}
 	
 	public static void startWork() {
+		initLoadingScreen();
 		generateButtons();
 		addSelectionToGUI();
 	}
 	
+	private static void initLoadingScreen() {
+		new Thread() {
+			@Override
+			public void run() {
+				try {
+					loadingScreen.init();
+					while(!viewModel.guiIsLoaded()) {
+						Thread.sleep(50);
+					}
+					loadingScreen.closeScreen();
+					gui.reorder();
+					gui.reloadScreen();
+				}catch(Exception ex) {
+					ex.printStackTrace();
+				}	
+			}
+		}.start();
+	}
+	
 	private static void generateButtons() {
+		SuperButton.setViewModel(viewModel);
 		ButtonField button = null;
 		String type = "";
 		for(int i = 0; i < 12; i++) {
@@ -68,6 +93,5 @@ public class ButtonContainerManager extends GUIManager{
 	
 	private static void addSelectionToGUI() {
 		gui.addElement(BorderLayout.WEST, buttonSelection);
-		//gui.reorder();
 	}
 }

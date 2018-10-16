@@ -19,16 +19,13 @@ import models.LoadedImage;
 public class ImageContainerManager extends GUIManager {		
 	private static ImageBar imageBar;
 	private static GUIElement scrollBar;
-	private static LoadingScreen loadingScreen;
 	
 	public static void init() {
 		imageBar = (ImageBar) guiElementFactory.getGUIElement("ImageContainer");
-		loadingScreen = (LoadingScreen) guiElementFactory.getGUIElement("LoadingWindow");
 	}
 	
 	public static void startWork() {
 		initImageBar();
-		initLoadingScreen();
 		handleFiles(viewModel.getSelectedFiles());
 		makeImageBarScrollable();
 		updateGUIAndViewModel();		
@@ -36,23 +33,6 @@ public class ImageContainerManager extends GUIManager {
 	
 	private static void initImageBar() {
 		imageBar.init();		
-	}	
-	
-	private static void initLoadingScreen() {
-		new Thread() {
-			@Override
-			public void run() {
-				try {
-					loadingScreen.init();
-					while(!viewModel.imagesAreAddedToContainer()) {
-						Thread.sleep(50);
-					}
-					loadingScreen.closeScreen();
-				}catch(Exception ex) {
-					ex.printStackTrace();
-				}	
-			}
-		}.start();
 	}
 	
 	private static void handleFiles(File[] files) {
@@ -132,7 +112,6 @@ public class ImageContainerManager extends GUIManager {
 	
 	private static void updateGUIAndViewModel() {
 		gui.addElement(BorderLayout.SOUTH, scrollBar);
-		gui.reorder();
-		viewModel.setImagesAreAddedToContainer(true);
+		viewModel.setGUIIsLoaded(true);
 	}
 }

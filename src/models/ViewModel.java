@@ -12,7 +12,7 @@ import interfaces.ImageDisplay;
 import interfaces.bar.DisplayedImage;
 import interfaces.bar.ImageBar;
 
-public class ViewModel {
+public class ViewModel {	
 	private String guiTitle;
 	private int guiWidth, guiHeight;
 	private int screenWidth, screenHeight;	
@@ -24,7 +24,7 @@ public class ViewModel {
 	private File[] selectedFiles;
 	private List<LoadedImage> loadedImages;
 	
-	private boolean imagesAreAddedToContainer;
+	private boolean guiIsLoaded;
 	private ImageBar imageBar;
 	
 	private LoadedImage selectedImage;
@@ -35,7 +35,7 @@ public class ViewModel {
 		this.guiWidth = guiWidth;
 		this.guiHeight = guiHeight;
 		this.loadedImages = new ArrayList<LoadedImage>();
-		this.imagesAreAddedToContainer = false;
+		this.guiIsLoaded = false;
 	}
 	
 	public String getGUITitle() {
@@ -52,7 +52,7 @@ public class ViewModel {
 	
 	public void setScreen(ImageDisplay screen) {
 		this.screen = screen;
-		this.screenWidth = screen.getScreenWidth() - 20;
+		this.screenWidth = screen.getScreenWidth() - 25;
 		this.screenHeight = screen.getScreenHeight() - 150;
 	}
 	
@@ -98,12 +98,12 @@ public class ViewModel {
 		this.loadedImages.remove(selectedImage.getIndex());
 	}
 	
-	public synchronized boolean imagesAreAddedToContainer() {
-		return this.imagesAreAddedToContainer;
+	public synchronized boolean guiIsLoaded() {
+		return this.guiIsLoaded;
 	}
 	
-	public void setImagesAreAddedToContainer(boolean imagesAreAddedToContainer) {
-		this.imagesAreAddedToContainer = imagesAreAddedToContainer;
+	public void setGUIIsLoaded(boolean guiIsLoaded) {
+		this.guiIsLoaded = guiIsLoaded;
 	}
 	
 	public void setImageBar(ImageBar imageBar) {

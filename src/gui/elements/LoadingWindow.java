@@ -11,15 +11,15 @@ import interfaces.LoadingScreen;
 
 public class LoadingWindow extends JFrame implements LoadingScreen{		
 	public LoadingWindow() {
-		super("Loading images...");
+		super("Building GUI...");
 		setDefaultCloseOperation(0);
         setPreferredSize(new Dimension(300, 80)); 
 		setDefaultCloseOperation(0);
 		JPanel center = new JPanel();
-		center.add(new JLabel("Images are loaded!"), BorderLayout.CENTER);
+		center.add(new JLabel("GUI is built!"), BorderLayout.CENTER);
         add(center);
         setResizable(false);
-	}
+	}	
 	
 	@Override
 	public void init() {  

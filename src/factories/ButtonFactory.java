@@ -1,10 +1,7 @@
 package factories;
 
-import gui.elements.buttons.FadeButton;
-import gui.elements.buttons.LensButton;
-import gui.elements.containers.ButtonContainer;
+import gui.elements.buttons.*;
 import interfaces.GUIElement;
-import interfaces.View;
 import models.ViewModel;
 
 public class ButtonFactory extends SuperFactory{
@@ -24,29 +21,29 @@ public class ButtonFactory extends SuperFactory{
 	public GUIElement getButtonField(String type) {
 		switch(type) {		
 		case "Selection":
-			return new FadeButton(viewModel);
+			return new SelectionButton();
 		case "Reset":
-			return new LensButton(viewModel);
+			return new ResetButton();
 		case "Fade":
-			return new LensButton(viewModel);
+			return new FadeButton();
 		case "Translate":
-			return new LensButton(viewModel);
+			return new TranslateButton();
 		case "Rotate":
-			return new LensButton(viewModel);
+			return new RotateButton();
 		case "Lens":
-			return new LensButton(viewModel);
+			return new LensButton();
 		case "Scale":
-			return new FadeButton(viewModel);
+			return new ScaleButton();
 		case "Shear":
-			return new LensButton(viewModel);
+			return new ShearButton();
 		case "Lines":
-			return new LensButton(viewModel);
+			return new LinesButton();
 		case "Circles":
-			return new LensButton(viewModel);
+			return new CirclesButton();
 		case "Start":
-			return new LensButton(viewModel);
+			return new StartButton();
 		case "Stop":
-			return new LensButton(viewModel);
+			return new StopButton();
 		}
 		return null;
 	}

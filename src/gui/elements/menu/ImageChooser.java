@@ -29,12 +29,14 @@ public class ImageChooser extends JFileChooser implements GUIElement{
 	private void handleUserAction(int returnValue) {
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			File[] selectedFiles = getSelectedFiles();
-			provideFiles(selectedFiles);
+			viewModel.setSelectedFiles(selectedFiles);
+			tellGUIManagerToBuild();
 		}
 	}
 	
-	private void provideFiles(File[] selectedFiles) {
-		viewModel.setSelectedFiles(selectedFiles);
-		GUIManager.initImageContainer();
+	private void tellGUIManagerToBuild() {
+		GUIManager.initButtonContainer();
+		GUIManager.initScreen();
+		GUIManager.initImageContainer();	
 	}
 }

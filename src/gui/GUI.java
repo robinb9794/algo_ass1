@@ -20,6 +20,7 @@ public class GUI extends JFrame implements View{
 		this.viewModel = viewModel;
 	}
 	
+	@Override
 	public void init() {
 		setTitle(viewModel.getGUITitle());
 		setPreferredSize(new Dimension(viewModel.getGUIWidth(), viewModel.getGUIHeight()));
@@ -47,6 +48,7 @@ public class GUI extends JFrame implements View{
 	
 	@Override
 	public void reorder() {
+		pack();
 		validate();
 	}
 	

@@ -47,11 +47,12 @@ public class ClickableImage extends JLabel implements DisplayedImage, MouseListe
 	@Override
 	public void mouseClicked(MouseEvent arg0) {		
 		if(!selected) {
-			viewModel.addLoadedImage(this.loadedImage);
+			viewModel.addSelectedImage(this.loadedImage);
 			viewModel.setTargetPixels(this.loadedImage.getGrabbedPixels());
 			displayedImageContainer.setContainerBackground(Color.GREEN);
 		}else {
 			viewModel.removeSelectedImage(this.loadedImage);
+			viewModel.updateDisplayedImage();
 			displayedImageContainer.setContainerBackground(Color.WHITE);
 		}
 		selected = !selected;

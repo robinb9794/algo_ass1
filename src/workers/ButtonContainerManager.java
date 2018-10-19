@@ -93,5 +93,6 @@ public class ButtonContainerManager extends GUIManager{
 	
 	private static void addSelectionToGUI() {
 		gui.addElement(BorderLayout.WEST, buttonSelection);
+		UserInteractionHandler.init(viewModel, gui);
 	}
 }

@@ -3,6 +3,7 @@ package gui.elements.buttons;
 import java.awt.event.ActionEvent;
 
 import models.Mode;
+import workers.UserInteractionHandler;
 
 public class StopButton extends SuperButton{
 	public StopButton() {
@@ -18,6 +19,7 @@ public class StopButton extends SuperButton{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		viewModel.setCurrentMode(Mode.STOP);
+		UserInteractionHandler.handleInteraction();
 	}
 
 }

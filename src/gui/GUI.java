@@ -2,11 +2,12 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
 
 import interfaces.GUIElement;
 import interfaces.View;
@@ -25,7 +26,13 @@ public class GUI extends JFrame implements View{
 		setTitle(viewModel.getGUITitle());
 		setPreferredSize(new Dimension(viewModel.getGUIWidth(), viewModel.getGUIHeight()));
 		setLayout(new BorderLayout());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent we) {
+				viewModel.setUserHasClosedGUI(true);
+				dispose();
+			}
+		});
 		setResizable(false);
 	}
 	

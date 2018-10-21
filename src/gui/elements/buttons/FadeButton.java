@@ -3,8 +3,7 @@ package gui.elements.buttons;
 import java.awt.event.ActionEvent;
 
 import models.Mode;
-import models.ViewModel;
-import workers.UserInteractionHandler;
+import workers.actions.FadeActionHandler;
 
 public class FadeButton extends SuperButton {	
 	public FadeButton() {
@@ -19,7 +18,6 @@ public class FadeButton extends SuperButton {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		viewModel.setCurrentMode(Mode.FADE);
-		UserInteractionHandler.handleInteraction();
+		FadeActionHandler.handle();
 	}
 }

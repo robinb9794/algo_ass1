@@ -1,17 +1,18 @@
 package models;
 
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.MemoryImageSource;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
-import gui.elements.Screen;
-import gui.elements.bar.ClickableImage;
 import interfaces.ImageDisplay;
-import interfaces.bar.DisplayedImage;
 import interfaces.bar.ImageBar;
+import interfaces.buttons.ButtonField;
 
 public class ViewModel {	
 	private String guiTitle;
@@ -33,6 +34,11 @@ public class ViewModel {
 	private LinkedList<LoadedImage> selectedImages;
 	private Mode currentMode;
 	
+	private Map<ButtonField, String> buttons;
+	
+	private Point selectionStartPoint, selectionEndPoint;
+	private Rectangle lastDrawnSelectionRectangle;
+	
 	public ViewModel(String guiTitle, int guiWidth, int guiHeight) {
 		this.guiTitle = guiTitle;
 		this.guiWidth = guiWidth;
@@ -41,6 +47,10 @@ public class ViewModel {
 		this.loadedImages = new ArrayList<LoadedImage>();
 		this.guiIsLoaded = false;
 		this.selectedImages = new LinkedList<LoadedImage>();
+		this.buttons = new HashMap<ButtonField, String>();
+		this.selectionStartPoint = new Point();
+		this.selectionEndPoint = new Point();
+		this.lastDrawnSelectionRectangle = new Rectangle();
 	}
 	
 	public String getGUITitle() {
@@ -61,6 +71,10 @@ public class ViewModel {
 	
 	public void setUserHasClosedGUI(boolean userHasClosedGUI) {
 		this.userHasClosedGUI = userHasClosedGUI;
+	}
+	
+	public ImageDisplay getScreen() {
+		return this.screen;
 	}
 	
 	public void setScreen(ImageDisplay screen) {
@@ -172,5 +186,37 @@ public class ViewModel {
 				this.targetPixels[index] = 0;
 			}
 		}
+	}
+	
+	public void addButton(ButtonField button, String type) {
+		buttons.put(button, type);
+	}
+	
+	public Map<ButtonField, String> getButtons(){
+		return this.buttons;
+	}
+	
+	public Point getSelectionStartPoint() {
+		return this.selectionStartPoint;
+	}
+	
+	public void setSelectionStartPoint(int x, int y) {
+		this.selectionStartPoint.setLocation(x, y);
+	}
+	
+	public Point getSelectionEndPoint() {
+		return this.selectionEndPoint;
+	}
+	
+	public void setSelectionEndPoint(int x, int y) {
+		this.selectionEndPoint.setLocation(x, y);
+	}
+	
+	public Rectangle getLastDrawnSelectionRectangle() {
+		return this.lastDrawnSelectionRectangle;
+	}
+	
+	public void setLastDrawnSelectionRectangle(Rectangle lastDrawnSelectionRectangle) {
+		this.lastDrawnSelectionRectangle = lastDrawnSelectionRectangle;
 	}
 }

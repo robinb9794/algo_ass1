@@ -17,8 +17,14 @@ public abstract class SuperButton extends JButton implements ButtonField, Action
 	protected static ViewModel viewModel;
 	
 	public SuperButton() {
+		setOpaque(true);
 		setBackground(Color.WHITE);
 		addActionListener(this);
+	}
+	
+	@Override
+	public void enableButton(boolean enable) {
+		setEnabled(enable);
 	}
 	
 	public static void setViewModel(ViewModel viewModel) {

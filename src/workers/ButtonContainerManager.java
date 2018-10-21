@@ -32,9 +32,9 @@ public class ButtonContainerManager extends GUIManager{
 					while(!viewModel.guiIsLoaded()) {
 						Thread.sleep(50);
 					}
-					loadingScreen.closeScreen();
 					gui.reorder();
 					gui.reloadScreen();
+					loadingScreen.closeScreen();
 				}catch(Exception ex) {
 					ex.printStackTrace();
 				}	
@@ -79,7 +79,7 @@ public class ButtonContainerManager extends GUIManager{
 				type = "Circles";
 				break;
 			case 10:
-				type = "Start";
+				type = "Save";
 				break;
 			case 11:
 				type = "Stop";
@@ -88,6 +88,7 @@ public class ButtonContainerManager extends GUIManager{
 			button = (ButtonField) buttonFactory.getButtonField(type);
 			button.init();
 			buttonSelection.addButton(button);
+			viewModel.addButton(button, type);
 		}
 	}
 	

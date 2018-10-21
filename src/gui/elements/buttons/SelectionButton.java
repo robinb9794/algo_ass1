@@ -2,8 +2,7 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
-import models.Mode;
-import models.ViewModel;
+import workers.actions.SelectionActionHandler;
 
 public class SelectionButton extends SuperButton{	
 	public SelectionButton() {
@@ -18,6 +17,6 @@ public class SelectionButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		viewModel.setCurrentMode(Mode.SELECTION);
+		SelectionActionHandler.handle();
 	}
 }

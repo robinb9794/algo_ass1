@@ -16,7 +16,7 @@ public class LoadingWindow extends JFrame implements LoadingScreen{
         setPreferredSize(new Dimension(300, 80)); 
 		setDefaultCloseOperation(0);
 		JPanel center = new JPanel();
-		center.add(new JLabel("GUI has been created!"), BorderLayout.CENTER);
+		center.add(new JLabel("GUI has been built!"), BorderLayout.CENTER);
         add(center);
         setResizable(false);
 	}	

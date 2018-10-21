@@ -35,6 +35,7 @@ public class ImageChooser extends JFileChooser implements GUIElement{
 	}
 	
 	private void tellGUIManagerToBuild() {
+		GUIManager.initUserInteractionHandler();
 		GUIManager.initButtonContainer();
 		GUIManager.initScreen();
 		GUIManager.initImageContainer();	

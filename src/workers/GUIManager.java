@@ -56,14 +56,18 @@ public class GUIManager {
 		setScreenValues();
 	}
 	
+	private static void setScreenValues() {
+		viewModel.setScreen(screen);
+		viewModel.initPixels();
+		viewModel.initMemoryImageSource();
+	}
+	
 	public static void initImageContainer() {
 		ImageContainerManager.init();
 		ImageContainerManager.startWork();
 	}
 	
-	private static void setScreenValues() {
-		viewModel.setScreen(screen);
-		viewModel.initPixels();
-		viewModel.initMemoryImageSource();
+	public static void initUserInteractionHandler() {
+		UserInteractionHandler.init(viewModel, gui);
 	}
 }

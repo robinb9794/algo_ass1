@@ -40,8 +40,8 @@ public class ButtonFactory extends SuperFactory{
 			return new LinesButton();
 		case "Circles":
 			return new CirclesButton();
-		case "Start":
-			return new StartButton();
+		case "Save":
+			return new SaveButton();
 		case "Stop":
 			return new StopButton();
 		}

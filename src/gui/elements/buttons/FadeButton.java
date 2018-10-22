@@ -2,7 +2,6 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
-import models.Mode;
 import workers.actions.FadeActionHandler;
 
 public class FadeButton extends SuperButton {	

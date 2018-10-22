@@ -13,6 +13,7 @@ import java.util.Map;
 import interfaces.ImageDisplay;
 import interfaces.bar.ImageBar;
 import interfaces.buttons.ButtonField;
+import workers.PixelCoordinator;
 
 public class ViewModel {	
 	private String guiTitle;
@@ -30,14 +31,12 @@ public class ViewModel {
 	private boolean guiIsLoaded;
 	private ImageBar imageBar;
 	
-	private LoadedImage selectedImage;
+	//private LoadedImage selectedImage;
 	private LinkedList<LoadedImage> selectedImages;
-	private Mode currentMode;
 	
 	private Map<ButtonField, String> buttons;
 	
 	private Point selectionStartPoint, selectionEndPoint;
-	private Rectangle lastDrawnSelectionRectangle;
 	
 	public ViewModel(String guiTitle, int guiWidth, int guiHeight) {
 		this.guiTitle = guiTitle;
@@ -50,7 +49,6 @@ public class ViewModel {
 		this.buttons = new HashMap<ButtonField, String>();
 		this.selectionStartPoint = new Point();
 		this.selectionEndPoint = new Point();
-		this.lastDrawnSelectionRectangle = new Rectangle();
 	}
 	
 	public String getGUITitle() {
@@ -94,6 +92,14 @@ public class ViewModel {
 	public void initPixels() {
 		this.sourcePixels = new int[this.screenWidth * this.screenHeight];
 		this.targetPixels = new int[this.screenWidth * this.screenHeight];
+	}
+	
+	public int[] getSourcePixels() {
+		return this.sourcePixels;
+	}
+	
+	public int[] getTargetPixels() {
+		return this.targetPixels;
 	}
 	
 	public void initMemoryImageSource() {
@@ -141,9 +147,12 @@ public class ViewModel {
 		LoadedImage nextDisplayedImage = null;
 		if(this.selectedImages.size() > 0) {
 			nextDisplayedImage = this.selectedImages.getLast();
-			setTargetPixels(nextDisplayedImage.getGrabbedPixels());
-		}else
-			resetTargetPixels();
+			PixelCoordinator.setSourcePixels(nextDisplayedImage.getGrabbedPixels());
+			PixelCoordinator.setTargetPixels(nextDisplayedImage.getGrabbedPixels());
+		}else {
+			PixelCoordinator.resetSourcePixels();
+			PixelCoordinator.resetTargetPixels();
+		}
 	}
 	
 	public synchronized boolean guiIsLoaded() {
@@ -160,32 +169,6 @@ public class ViewModel {
 	
 	public ImageBar getImageBar() {
 		return this.imageBar;
-	}
-	
-	public void setCurrentMode(Mode currentMode) {
-		this.currentMode = currentMode;
-	}
-	
-	public Mode getCurrentMode() {
-		return this.currentMode;
-	}
-	
-	public void setTargetPixels(int[] pixels) {
-		for(int i = 0; i < this.screenWidth; i++) {
-			for(int j = 0; j < this.screenHeight; j++) {
-				int index = j * this.screenWidth + i;
-				this.targetPixels[index] = pixels[index];
-			}
-		}
-	}
-	
-	public void resetTargetPixels() {
-		for(int i = 0; i < this.screenWidth; i++) {
-			for(int j = 0; j < this.screenHeight; j++) {
-				int index = j * this.screenWidth + i;
-				this.targetPixels[index] = 0;
-			}
-		}
 	}
 	
 	public void addButton(ButtonField button, String type) {
@@ -212,11 +195,8 @@ public class ViewModel {
 		this.selectionEndPoint.setLocation(x, y);
 	}
 	
-	public Rectangle getLastDrawnSelectionRectangle() {
-		return this.lastDrawnSelectionRectangle;
-	}
-	
-	public void setLastDrawnSelectionRectangle(Rectangle lastDrawnSelectionRectangle) {
-		this.lastDrawnSelectionRectangle = lastDrawnSelectionRectangle;
+	public void resetSelectionPoints() {
+		this.selectionStartPoint = new Point();
+		this.selectionEndPoint = new Point();
 	}
 }

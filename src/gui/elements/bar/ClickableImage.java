@@ -12,6 +12,7 @@ import interfaces.bar.DisplayedImage;
 import interfaces.bar.DisplayedImageContainer;
 import models.LoadedImage;
 import models.ViewModel;
+import workers.PixelCoordinator;
 
 public class ClickableImage extends JLabel implements DisplayedImage, MouseListener{	
 	private View gui;
@@ -48,7 +49,8 @@ public class ClickableImage extends JLabel implements DisplayedImage, MouseListe
 	public void mouseClicked(MouseEvent arg0) {		
 		if(!selected) {
 			viewModel.addSelectedImage(this.loadedImage);
-			viewModel.setTargetPixels(this.loadedImage.getGrabbedPixels());
+			PixelCoordinator.setSourcePixels(this.loadedImage.getGrabbedPixels());
+			PixelCoordinator.setTargetPixels(this.loadedImage.getGrabbedPixels());
 			displayedImageContainer.setContainerBackground(Color.GREEN);
 		}else {
 			viewModel.removeSelectedImage(this.loadedImage);

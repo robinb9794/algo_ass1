@@ -5,13 +5,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-import models.Mode;
-import workers.UserInteractionHandler;
+import workers.PixelCoordinator;
+import workers.SuperUserInteractionHandler;
 
-public class SelectionActionHandler extends UserInteractionHandler{	
+public class SelectionActionHandler extends SuperUserInteractionHandler{	
 	public static void handle() {
 		if(userHasSelectedAtLeastOneImage()) {
-			viewModel.setCurrentMode(Mode.SELECTION);
 			addMouseMotionListenerToScreen();
 			addMouseListenerToScreen();
 		}
@@ -21,14 +20,17 @@ public class SelectionActionHandler extends UserInteractionHandler{
 	
 	private static boolean userHasSelectedAtLeastOneImage() {
 		return viewModel.getSelectedImages().size() >= 1;
-	}
-	
+	}	
+		
 	private static void addMouseMotionListenerToScreen() {
 		viewModel.getScreen().addCustomMouseMotionListener(new MouseMotionAdapter() {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				viewModel.setSelectionEndPoint(e.getX(), e.getY());
+				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
+				PixelCoordinator.setSelectionPixels();
+				gui.reloadScreen();
 			}
 			
 		});
@@ -50,7 +52,7 @@ public class SelectionActionHandler extends UserInteractionHandler{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				viewModel.setSelectionEndPoint(e.getX(), e.getY());
-				viewModel.getScreen().drawSelectionRectangle();
+				enableResetButton();
 			}
 			
 		});

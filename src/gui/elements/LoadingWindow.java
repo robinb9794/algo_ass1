@@ -10,22 +10,28 @@ import javax.swing.JPanel;
 import interfaces.LoadingScreen;
 
 public class LoadingWindow extends JFrame implements LoadingScreen{		
-	public LoadingWindow() {
-		super("Building GUI...");
+	private String title;
+	private String message;
+	
+	@Override
+	public void init() {  
+		setTitle(title);
 		setDefaultCloseOperation(0);
         setPreferredSize(new Dimension(300, 80)); 
 		setDefaultCloseOperation(0);
 		JPanel center = new JPanel();
-		center.add(new JLabel("GUI has been built!"), BorderLayout.CENTER);
+		center.add(new JLabel(message), BorderLayout.CENTER);
         add(center);
         setResizable(false);
-	}	
-	
-	@Override
-	public void init() {  
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
+	}
+	
+	@Override
+	public void setValues(String title, String message) {
+		this.title = title;
+		this.message = message;
 	}
 
 	@Override
@@ -36,5 +42,5 @@ public class LoadingWindow extends JFrame implements LoadingScreen{
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-	}
+	}	
 }

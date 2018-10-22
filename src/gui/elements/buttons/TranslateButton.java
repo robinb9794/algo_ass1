@@ -2,8 +2,6 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
-import models.Mode;
-
 public class TranslateButton extends SuperButton{
 	public TranslateButton() {
 		super();
@@ -17,6 +15,6 @@ public class TranslateButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		viewModel.setCurrentMode(Mode.TRANSLATE);
+		
 	}	
 }

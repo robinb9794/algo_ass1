@@ -2,8 +2,6 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
-import models.Mode;
-
 public class LinesButton extends SuperButton{
 	public LinesButton() {
 		super();
@@ -17,7 +15,7 @@ public class LinesButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		viewModel.setCurrentMode(Mode.LINES);
+		
 	}
 
 }

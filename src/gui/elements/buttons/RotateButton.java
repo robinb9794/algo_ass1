@@ -2,8 +2,6 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
-import models.Mode;
-
 public class RotateButton extends SuperButton{
 	public RotateButton() {
 		super();
@@ -17,7 +15,7 @@ public class RotateButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		viewModel.setCurrentMode(Mode.ROTATE);
+		
 	}
 
 }

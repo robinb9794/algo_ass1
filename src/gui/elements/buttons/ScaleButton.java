@@ -2,8 +2,6 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
-import models.Mode;
-
 public class ScaleButton extends SuperButton{
 	public ScaleButton() {
 		super();
@@ -17,7 +15,7 @@ public class ScaleButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		viewModel.setCurrentMode(Mode.SCALE);
+		
 	}
 
 }

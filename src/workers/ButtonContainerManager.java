@@ -28,6 +28,7 @@ public class ButtonContainerManager extends GUIManager{
 			@Override
 			public void run() {
 				try {
+					loadingScreen.setValues("Building GUI...", "GUI has been built!");
 					loadingScreen.init();
 					while(!viewModel.guiIsLoaded()) {
 						Thread.sleep(50);
@@ -94,6 +95,6 @@ public class ButtonContainerManager extends GUIManager{
 	
 	private static void addSelectionToGUI() {
 		gui.addElement(BorderLayout.WEST, buttonSelection);
-		UserInteractionHandler.init(viewModel, gui);
+		SuperUserInteractionHandler.init(viewModel, gui);
 	}
 }

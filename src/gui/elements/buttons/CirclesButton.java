@@ -2,8 +2,6 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
-import models.Mode;
-
 public class CirclesButton extends SuperButton{
 	public CirclesButton() {
 		super();
@@ -17,7 +15,7 @@ public class CirclesButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		viewModel.setCurrentMode(Mode.CIRCLES);
+		
 	}
 
 }

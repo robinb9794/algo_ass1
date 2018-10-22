@@ -62,12 +62,16 @@ public class GUIManager {
 		viewModel.initMemoryImageSource();
 	}
 	
+	public static void initPixelCoordinator() {
+		PixelCoordinator.init(viewModel, gui);
+	}
+	
 	public static void initImageContainer() {
 		ImageContainerManager.init();
 		ImageContainerManager.startWork();
 	}
 	
 	public static void initUserInteractionHandler() {
-		UserInteractionHandler.init(viewModel, gui);
+		SuperUserInteractionHandler.init(viewModel, gui);
 	}
 }

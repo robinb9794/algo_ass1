@@ -8,15 +8,26 @@ import workers.SuperUserInteractionHandler;
 public class StopActionHandler extends SuperUserInteractionHandler{
 	public static void handle() {
 		isFading = false;
+		resetScreenListener();
 		enableAndDisableButtons();
 	}
 	
 	private static void enableAndDisableButtons() {
 		for(Entry<ButtonField, String> entry : viewModel.getButtons().entrySet()) {
-			if(entry.getValue().equals("Reset") || entry.getValue().equals("Save") || entry.getValue().equals("Stop")) {
-				entry.getKey().enableButton(false);
-			}else {
-				entry.getKey().enableButton(true);
+			ButtonField button = entry.getKey();
+			String value = entry.getValue();
+			switch(value) {
+			case "Reset":
+				button.enableButton(false);
+				break;
+			case "Save":
+				button.enableButton(false);
+				break;
+			case "Stop":
+				button.enableButton(false);
+				break;
+			default:
+				button.enableButton(true);
 			}
 		}
 	}

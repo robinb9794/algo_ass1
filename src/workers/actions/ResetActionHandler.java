@@ -7,6 +7,7 @@ public class ResetActionHandler extends SuperUserInteractionHandler{
 	public static void handle() {
 		resetSelectionPoints();
 		resetDisplayedImage();
+		disableSingleButton("Reset");
 	}
 	
 	private static void resetSelectionPoints() {

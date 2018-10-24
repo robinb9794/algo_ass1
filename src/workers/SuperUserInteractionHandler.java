@@ -28,11 +28,27 @@ public class SuperUserInteractionHandler {
 		JOptionPane.showMessageDialog(null, message, "Error!", JOptionPane.ERROR_MESSAGE);
 	}
 	
-	protected static void enableResetButton() {
+	protected static void enableSingleButton(String value) {
 		for(Entry<ButtonField, String> entry : viewModel.getButtons().entrySet()) {
-		    if(entry.getValue().equals("Reset")) {
-		    	entry.getKey().enableButton(true);
+			ButtonField button = entry.getKey();
+			String buttonValue = entry.getValue();
+		    if(buttonValue.equals(value)) {
+		    	button.enableButton(true);
 		    }
 		}
+	}
+	
+	protected static void disableSingleButton(String value) {
+		for(Entry<ButtonField, String> entry : viewModel.getButtons().entrySet()) {
+			ButtonField button = entry.getKey();
+			String buttonValue = entry.getValue();
+		    if(buttonValue.equals(value)) {
+		    	button.enableButton(false);
+		    }
+		}
+	}
+	
+	protected static void resetScreenListener() {
+		viewModel.getScreen().resetMouseActions();
 	}
 }

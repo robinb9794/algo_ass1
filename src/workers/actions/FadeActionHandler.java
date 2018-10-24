@@ -9,7 +9,8 @@ import workers.SuperUserInteractionHandler;
 
 public class FadeActionHandler extends SuperUserInteractionHandler{
 	public static void handle() {
-		if(userHasSelectedImagesToFade() && !isFading) {
+		if(userHasSelectedImagesToFade()) {
+			resetScreenListener();
 			disableOtherButtons();
 			new Thread() {
 				@Override
@@ -58,7 +59,7 @@ public class FadeActionHandler extends SuperUserInteractionHandler{
 	private static void fade(LoadedImage firstImageToFade, LoadedImage secondImageToFade) {
 		try {
 			int p = 0;
-			while(p <= 100 && isFading) {
+			while(p <= 100 && shouldFade()) {
 				fade(firstImageToFade, secondImageToFade, p);
 				gui.reloadScreen();
 				Thread.sleep(100);
@@ -69,11 +70,14 @@ public class FadeActionHandler extends SuperUserInteractionHandler{
 		}		
 	}
 	
-	private static void fade(LoadedImage firstImageToFade, LoadedImage secondImageToFade, int p) {
-		int[] fadedPixels = new int[viewModel.getScreenWidth() * viewModel.getScreenHeight()];
-		for (int i = 0; i < viewModel.getScreenWidth() * viewModel.getScreenHeight(); i++) {
-			fadedPixels[i] = PixelCoordinator.colorShuffle(firstImageToFade.getGrabbedPixels()[i], secondImageToFade.getGrabbedPixels()[i], p);
+	private static void fade(LoadedImage firstImageToFade, LoadedImage secondImageToFade, int p) {		
+		PixelCoordinator.resetTargetPixels();
+		for(int i = 0; i < viewModel.getScreenWidth(); i++) {
+			for(int j = 0; j < viewModel.getScreenHeight(); j++) {
+				int index = PixelCoordinator.getPixelIndex(i, j);
+				int fadedPixel = PixelCoordinator.colorShuffle(firstImageToFade.getGrabbedPixels()[index], secondImageToFade.getGrabbedPixels()[index], p);
+				PixelCoordinator.setSingleTargetPixel(index, fadedPixel);
+			}
 		}
-		PixelCoordinator.setTargetPixels(fadedPixels);
 	}
 }

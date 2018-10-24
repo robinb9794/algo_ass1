@@ -6,4 +6,5 @@ import models.LoadedImage;
 public interface DisplayedImage extends GUIElement{
 	void setDisplayedImageContainer(DisplayedImageContainer displayedImageContainer);
 	void addImageIconFromLoadedImage(LoadedImage loadedImage);
+	void checkActions();
 }

@@ -2,8 +2,8 @@ package gui.elements.bar;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 
@@ -14,7 +14,7 @@ import models.LoadedImage;
 import models.ViewModel;
 import workers.PixelCoordinator;
 
-public class ClickableImage extends JLabel implements DisplayedImage, MouseListener{	
+public class ClickableImage extends JLabel implements DisplayedImage{	
 	private View gui;
 	private ViewModel viewModel;
 	
@@ -30,7 +30,36 @@ public class ClickableImage extends JLabel implements DisplayedImage, MouseListe
 	
 	@Override
 	public void init() {
-		addMouseListener(this);
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {		
+				if(!selected) {
+					viewModel.addSelectedImage(loadedImage);
+					PixelCoordinator.setSourcePixels(loadedImage.getGrabbedPixels());
+					PixelCoordinator.setTargetPixels(loadedImage.getGrabbedPixels());
+					displayedImageContainer.setContainerBackground(Color.GREEN);
+				}else {
+					viewModel.removeSelectedImage(loadedImage);
+					viewModel.updateDisplayedImage();
+					displayedImageContainer.setContainerBackground(Color.WHITE);
+				}
+				checkActions();
+				selected = !selected;
+				gui.reloadScreen();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				if(!selected)
+					displayedImageContainer.setContainerBackground(Color.GRAY);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				if(!selected)
+					displayedImageContainer.setContainerBackground(Color.WHITE);
+			}
+		});
 	}
 	
 	@Override
@@ -46,36 +75,8 @@ public class ClickableImage extends JLabel implements DisplayedImage, MouseListe
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {		
-		if(!selected) {
-			viewModel.addSelectedImage(this.loadedImage);
-			PixelCoordinator.setSourcePixels(this.loadedImage.getGrabbedPixels());
-			PixelCoordinator.setTargetPixels(this.loadedImage.getGrabbedPixels());
-			displayedImageContainer.setContainerBackground(Color.GREEN);
-		}else {
-			viewModel.removeSelectedImage(this.loadedImage);
-			viewModel.updateDisplayedImage();
-			displayedImageContainer.setContainerBackground(Color.WHITE);
-		}
-		selected = !selected;
-		this.gui.reloadScreen();
+	public void checkActions() {
+		if(viewModel.getSelectedImages().size() < 2)
+			viewModel.getScreen().resetMouseActions();
 	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		if(!selected)
-			displayedImageContainer.setContainerBackground(Color.GRAY);
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		if(!selected)
-			displayedImageContainer.setContainerBackground(Color.WHITE);
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {}
 }

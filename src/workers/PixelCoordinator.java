@@ -48,45 +48,13 @@ public class PixelCoordinator {
 		}
 	}
 	
-	public static void setSelectionPixels() {
-		int selectionStartX = getStartX();
-		int selectionEndX= getEndX();
-		int selectionStartY = getStartY();
-		int selectionEndY = getEndY();
-		for(int i = selectionStartX; i <= selectionEndX; i++) {
-			for(int j = selectionStartY; j <= selectionEndY; j++) {
-				if(pixelIsOnSelectionLine(i, j, selectionStartX, selectionEndX, selectionStartY, selectionEndY)) {
-					int index = j * viewModel.getScreenWidth() + i;
-					int sourcePixel = viewModel.getSourcePixels()[index];
-					viewModel.getTargetPixels()[index] = getSelectionColor(index, sourcePixel);	
-				}							
-			}
-		}
+	public static int getSingleSourcePixel(int index) {
+		return viewModel.getSourcePixels()[index];
 	}
 	
-	private static int getStartX() {
-		return Math.min((int) viewModel.getSelectionStartPoint().getX(), (int) viewModel.getSelectionEndPoint().getX());
-	}
-	
-	private static int getEndX() {
-		return Math.max((int) viewModel.getSelectionStartPoint().getX(), (int) viewModel.getSelectionEndPoint().getX());
-	}
-	
-	private static int getStartY() {
-		return Math.min((int) viewModel.getSelectionStartPoint().getY(), (int) viewModel.getSelectionEndPoint().getY());
-	}
-	
-	private static int getEndY() {
-		return Math.max((int) viewModel.getSelectionStartPoint().getY(), (int) viewModel.getSelectionEndPoint().getY());
-	}
-	
-	private static boolean pixelIsOnSelectionLine(int i, int j, int startX, int endX, int startY, int endY) {
-		return i == startX || i == endX || j == startY || j == endY ;
-	}
-	
-	private static int getSelectionColor(int index, int sourcePixel) {
-		return 255 << 24 | 255 << 16 | 0 << 8 | 78;
-	}
+	public static void setSingleTargetPixel(int index, int value) {
+		viewModel.getTargetPixels()[index] = value;
+	}	
 	
 	public static int colorShuffle(int pix1, int pix2, int p) {
 		int red = singleShuffle((pix1 >> 16) & 255, (pix2 >> 16) & 255, p);
@@ -97,5 +65,9 @@ public class PixelCoordinator {
 	
 	public static int singleShuffle(int part1, int part2, int p) {
 		return part1 + (part2 - part1) * p / 100;
-	}			
+	}
+	
+	public static int getPixelIndex(int i, int j) {
+		return j * viewModel.getScreenWidth() + i;
+	}
 }

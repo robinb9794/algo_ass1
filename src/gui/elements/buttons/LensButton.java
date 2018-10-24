@@ -2,6 +2,9 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
+import workers.SuperUserInteractionHandler;
+import workers.actions.LensActionHandler;
+
 public class LensButton extends SuperButton{	
 	public LensButton() {
 		super();
@@ -15,6 +18,6 @@ public class LensButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		LensActionHandler.handle();
 	}
 }

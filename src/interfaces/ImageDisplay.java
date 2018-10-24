@@ -10,4 +10,5 @@ public interface ImageDisplay extends GUIElement{
 	void addCustomMouseMotionListener(MouseMotionListener mouseMotionLilstener);
 	void addCustomMouseListener(MouseListener mouseListener);
 	void setCustomCursor(Cursor cursor);
+	void resetMouseActions();
 }

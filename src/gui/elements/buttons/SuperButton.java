@@ -38,5 +38,5 @@ public abstract class SuperButton extends JButton implements ButtonField, Action
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-	}
+	}	
 }

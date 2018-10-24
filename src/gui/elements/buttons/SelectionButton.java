@@ -2,6 +2,7 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
+import workers.SuperUserInteractionHandler;
 import workers.actions.SelectionActionHandler;
 
 public class SelectionButton extends SuperButton{	

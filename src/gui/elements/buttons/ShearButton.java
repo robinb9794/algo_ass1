@@ -10,6 +10,7 @@ public class ShearButton extends SuperButton{
 	@Override
 	public void init() {
 		setToolTipText("Shear");
+		setEnabled(false);
 		setIconFromUrl("http://cdn.onlinewebfonts.com/svg/img_524800.png");
 	}
 

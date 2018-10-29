@@ -1,6 +1,7 @@
 package workers;
 
 import interfaces.View;
+import models.LoadedImage;
 import models.ViewModel;
 
 public class PixelCoordinator {
@@ -28,6 +29,10 @@ public class PixelCoordinator {
 				viewModel.getTargetPixels()[index] = pixels[index];
 			}
 		}
+	}
+	
+	public static int getSinglePixelFromImage(LoadedImage image, int index) {
+		return image.getGrabbedPixels()[index];
 	}
 	
 	public static void resetSourcePixels() {

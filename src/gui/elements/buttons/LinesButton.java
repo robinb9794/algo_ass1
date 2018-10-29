@@ -10,6 +10,7 @@ public class LinesButton extends SuperButton{
 	@Override
 	public void init() {
 		setToolTipText("Draw lines");
+		setEnabled(false);
 		setIconFromUrl("https://cdn3.iconfinder.com/data/icons/math-1/96/icons__Angles_and_Parallel_Lines-512.png");
 	}
 

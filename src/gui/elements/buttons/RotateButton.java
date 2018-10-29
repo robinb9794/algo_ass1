@@ -10,6 +10,7 @@ public class RotateButton extends SuperButton{
 	@Override
 	public void init() {
 		setToolTipText("Rotate");
+		setEnabled(false);
 		setIconFromUrl("https://static.thenounproject.com/png/120470-200.png");
 	}
 

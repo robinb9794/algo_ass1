@@ -13,6 +13,7 @@ import java.util.Map;
 import interfaces.ImageDisplay;
 import interfaces.bar.ImageBar;
 import interfaces.buttons.ButtonField;
+import models.math.Matrix;
 import workers.PixelCoordinator;
 
 public class ViewModel {	
@@ -37,6 +38,8 @@ public class ViewModel {
 	private Map<ButtonField, String> buttons;
 	
 	private Point selectionStartPoint, selectionEndPoint;
+	
+	private Matrix morphMatrix;
 	
 	public ViewModel(String guiTitle, int guiWidth, int guiHeight) {
 		this.guiTitle = guiTitle;
@@ -198,5 +201,13 @@ public class ViewModel {
 	public void resetSelectionPoints() {
 		this.selectionStartPoint = new Point();
 		this.selectionEndPoint = new Point();
+	}
+	
+	public Matrix getMorphMatrix() {
+		return this.morphMatrix;
+	}
+	
+	public void setMorphMatrix(Matrix morphMatrix) {
+		this.morphMatrix = morphMatrix;
 	}
 }

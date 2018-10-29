@@ -4,23 +4,25 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Map.Entry;
 
+import interfaces.buttons.ButtonField;
 import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
 
 public class SelectionActionHandler extends SuperUserInteractionHandler{	
 	public static void handle() {
-		if(userHasSelectedAtLeastOneImage()) {
+		if(userHasSelectedTwoImages()) {
 			resetScreenListener();
 			addMouseMotionListenerToScreen();
 			addMouseListenerToScreen();
 		}
 		else
-			showErrorDialog("Please select at least one image.");
+			showErrorDialog("Please select exactly two images.");
 	}
 	
-	private static boolean userHasSelectedAtLeastOneImage() {
-		return viewModel.getSelectedImages().size() >= 1;
+	private static boolean userHasSelectedTwoImages() {
+		return viewModel.getSelectedImages().size() == 2;
 	}	
 		
 	private static void addMouseMotionListenerToScreen() {
@@ -52,8 +54,9 @@ public class SelectionActionHandler extends SuperUserInteractionHandler{
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				System.out.println("(" + e.getX() + "|" + e.getY() + ")");
 				viewModel.setSelectionEndPoint(e.getX(), e.getY());
-				enableSingleButton("Reset");
+				enableOrDisableButtonsAfterSelection(true);
 			}
 			
 		});
@@ -73,22 +76,6 @@ public class SelectionActionHandler extends SuperUserInteractionHandler{
 				}							
 			}
 		}
-	}
-	
-	private static int getStartX() {
-		return Math.min((int) viewModel.getSelectionStartPoint().getX(), (int) viewModel.getSelectionEndPoint().getX());
-	}
-	
-	private static int getEndX() {
-		return Math.max((int) viewModel.getSelectionStartPoint().getX(), (int) viewModel.getSelectionEndPoint().getX());
-	}
-	
-	private static int getStartY() {
-		return Math.min((int) viewModel.getSelectionStartPoint().getY(), (int) viewModel.getSelectionEndPoint().getY());
-	}
-	
-	private static int getEndY() {
-		return Math.max((int) viewModel.getSelectionStartPoint().getY(), (int) viewModel.getSelectionEndPoint().getY());
 	}
 	
 	private static boolean pixelIsOnSelectionLine(int i, int j, int startX, int endX, int startY, int endY) {

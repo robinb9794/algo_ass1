@@ -10,6 +10,7 @@ public class ScaleButton extends SuperButton{
 	@Override
 	public void init() {
 		setToolTipText("Scale");
+		setEnabled(false);
 		setIconFromUrl("http://cdn.onlinewebfonts.com/svg/img_524792.png");
 	}
 

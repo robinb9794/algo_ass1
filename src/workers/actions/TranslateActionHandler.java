@@ -1,9 +1,7 @@
 package workers.actions;
 
-import javax.swing.JLabel;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import gui.elements.dialogs.TranslateWindow;
 import models.MorphValues;
@@ -15,53 +13,66 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 	private static TranslateWindow translateWindow;
 	
 	public static void handle() {
+		resetScreenListener();
 		initDialog();
 		disableSingleButton("Translate");
 	}
 	
 	private static void initDialog() {
 		translateWindow = new TranslateWindow();
-		addHorizontalElementsToDialog();
-		addVerticalElementsToDialog();
+		translateWindow.initButtons();
+		addListenerToButtons();
 		translateWindow.pack();
 		translateWindow.setLocationRelativeTo(null);
 		translateWindow.setVisible(true);
-	}	
-	
-	private static void addHorizontalElementsToDialog() {
-		translateWindow.add(new JLabel(" Left/Right:"));
-		translateWindow.horizontalSlider = new JSlider(JSlider.HORIZONTAL, -100, 100, 0);
-		addHorizontalSliderListener();
-		translateWindow.add(translateWindow.horizontalSlider);
 	}
 	
-	private static void addHorizontalSliderListener() {
-		translateWindow.horizontalSlider.addChangeListener(new ChangeListener() {
+	private static void addListenerToButtons() {
+		translateWindow.left.addActionListener(new ActionListener() {
 			@Override
-			public void stateChanged(ChangeEvent e) {
-				System.out.println("translateX: " + translateWindow.horizontalSlider.getValue());
-				MorphValues.translateX = translateWindow.horizontalSlider.getValue() * -1;
+			public void actionPerformed(ActionEvent e) {
+				MorphValues.translateX -= 5;
+				System.out.println("translateX: " + MorphValues.translateX);
 				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
 				setTranslationMatrix();
 				morph();
+				gui.reloadScreen();
 			}
 		});
-	}
-	
-	private static void addVerticalElementsToDialog() {
-		translateWindow.add(new JLabel(" Up/Down:"));
-		translateWindow.verticalSlider = new JSlider(JSlider.HORIZONTAL, -100, 100, 0);
-		addVerticalSliderListener();
-		translateWindow.add(translateWindow.verticalSlider);
-	}
-	
-	private static void addVerticalSliderListener() {
-		translateWindow.verticalSlider.addChangeListener(new ChangeListener() {
+		
+		translateWindow.right.addActionListener(new ActionListener() {
 			@Override
-			public void stateChanged(ChangeEvent e) {
-				MorphValues.translateY = translateWindow.horizontalSlider.getValue() * -1;
+			public void actionPerformed(ActionEvent e) {
+				MorphValues.translateX += 5;
+				System.out.println("translateX: " + MorphValues.translateX);
+				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
 				setTranslationMatrix();
 				morph();
+				gui.reloadScreen();
+			}
+		});
+		
+		translateWindow.up.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MorphValues.translateY -= 5;
+				System.out.println("translateY: " + MorphValues.translateY);
+				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
+				setTranslationMatrix();
+				morph();
+				gui.reloadScreen();
+			}
+		});
+		
+		translateWindow.down.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MorphValues.translateY += 5;
+				System.out.println("translateY: " + MorphValues.translateY);
+				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
+				setTranslationMatrix();
+				morph();
+				gui.reloadScreen();
 			}
 		});
 	}

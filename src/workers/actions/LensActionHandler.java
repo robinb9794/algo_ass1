@@ -34,8 +34,8 @@ public class LensActionHandler extends SuperUserInteractionHandler {
 	}
 	
 	private static void lens(int mouseX, int mouseY) {
-		PixelCoordinator.resetTargetPixels();
-		LoadedImage backgroundImage = viewModel.getSelectedImageByIndex(0);
+		PixelCoordinator.setSourcePixels(viewModel.getSelectedImages().getFirst().getGrabbedPixels());
+		LoadedImage imageToLensThrough = viewModel.getSelectedImages().getLast();
 		for(int i = 0; i < viewModel.getScreenWidth(); i++) {
 			for(int j = 0; j < viewModel.getScreenHeight(); j++) {
 				int index = PixelCoordinator.getPixelIndex(i, j);
@@ -43,9 +43,9 @@ public class LensActionHandler extends SuperUserInteractionHandler {
 				double dy = mouseY - j;
 				double lensValue = (Math.pow(dx, 2) + Math.pow(dy,  2)) / 100;
 				lensValue = lensValue > 100 ? 100 : lensValue;
-				int backgroundPixel = backgroundImage.getGrabbedPixels()[index];
+				int backgroundPixel = PixelCoordinator.getSinglePixelFromImage(imageToLensThrough, index);
 				int sourcePixel = PixelCoordinator.getSingleSourcePixel(index);
-				int lensPixel = PixelCoordinator.colorShuffle(backgroundPixel, sourcePixel, (int) lensValue);
+				int lensPixel = PixelCoordinator.colorShuffle(sourcePixel, backgroundPixel, (int) lensValue);
 				PixelCoordinator.setSingleTargetPixel(index, lensPixel);
 			}
 		}

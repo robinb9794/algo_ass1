@@ -1,26 +1,58 @@
 package gui.elements.dialogs;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JSlider;
 
-public class TranslateWindow extends JDialog{
-	public JSlider horizontalSlider, verticalSlider;
+public class TranslateWindow extends JDialog{		
+	public JButton left, right, up, down;
 	
 	public TranslateWindow() {
 		setTitle("Translate");
 		setModal(true);
-		setLayout(new GridLayout(2, 2));
-		setPreferredSize(new Dimension(400, 100));
+		setLayout(new FlowLayout());
+		setPreferredSize(new Dimension(300, 80));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				dispose();
 			}
 		});
+	}
+	
+	public void initButtons() {
+		BufferedImage buttonIcon;
+		try {
+			left = new JButton();
+			buttonIcon = ImageIO.read(new URL("https://image.freepik.com/free-icon/arrow-bold-left-ios-7-interface-symbol_318-34824.jpg"));
+			left.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16,  16, Image.SCALE_SMOOTH)));
+			add(left);
+			
+			right = new JButton();
+			buttonIcon = ImageIO.read(new URL("https://image.freepik.com/free-icon/arrow-bold-right-ios-7-symbol_318-35504.jpg"));
+			right.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
+			add(right);
+			
+			up = new JButton();
+			buttonIcon = ImageIO.read(new URL("https://image.freepik.com/free-icon/up-arrow_318-123025.jpg"));
+			up.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
+			add(up);
+			
+			down = new JButton();
+			buttonIcon = ImageIO.read(new URL("https://image.freepik.com/free-icon/side-down_318-125102.jpg"));
+			down.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
+			add(down);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 }

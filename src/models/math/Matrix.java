@@ -11,7 +11,7 @@ public class Matrix {
 		int[] result = new int[matrix.data.length];
 		for(int i = 0; i < matrix.data.length; i++) {
 			for(int j = 0; j < matrix.data[i].length; j++) {
-				result[i] += matrix.data[i][j] * vector.get(i);
+				result[i] += matrix.data[i][j] * vector.get(j);
 			}
 		}
 		return new Vector(result[0], result[1]);
@@ -30,7 +30,7 @@ public class Matrix {
 	}
 	
 	public static Matrix translate(int dx, int dy) {
-		double[][] data = {{1, 0, dx}, {0, 1, dy}, {0, 0, 1}};
+		double[][] data = {{1, 0, -dx}, {0, 1, -dy}, { 0, 0, 1}};
 		return new Matrix(data);
 	}
 }

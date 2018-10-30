@@ -90,10 +90,10 @@ public class SuperUserInteractionHandler {
 		for(int i = 0; i < viewModel.getScreenWidth(); i++) {
 			for(int j = 0; j < viewModel.getScreenHeight(); j++) {
 				Vector targetVector = new Vector(i, j);
-				int targetIndex = PixelCoordinator.getPixelIndex(targetVector.getX(), targetVector.getY());
 				Vector sourceVector = Matrix.multiply(viewModel.getMorphMatrix(), targetVector);
+				int targetIndex = PixelCoordinator.getPixelIndex(i, j);
 				int sourceIndex = PixelCoordinator.getPixelIndex(sourceVector.getX(), sourceVector.getY());
-				if(sourcePixelIsInSelectionArea(sourceVector)) {
+				if(pixelIsInSelectionArea(sourceVector)) {
 					int morphPixel = PixelCoordinator.getSingleSourcePixel(sourceIndex);
 					PixelCoordinator.setSingleTargetPixel(targetIndex, morphPixel);
 				}else {
@@ -102,7 +102,6 @@ public class SuperUserInteractionHandler {
 				}
 			}
 		}
-		gui.reloadScreen();
 	}
 	
 	protected static int getStartX() {
@@ -121,7 +120,7 @@ public class SuperUserInteractionHandler {
 		return Math.max((int) viewModel.getSelectionStartPoint().getY(), (int) viewModel.getSelectionEndPoint().getY());
 	}
 	
-	private static boolean sourcePixelIsInSelectionArea(Vector sourceVector) {
-		return sourceVector.getX() >= getStartX() && sourceVector.getX() <= getEndX() && sourceVector.getY() >= getStartY() && sourceVector.getY() <= getEndY();
+	private static boolean pixelIsInSelectionArea(Vector vector) {
+		return vector.getX() > getStartX() && vector.getX() < getEndX() && vector.getY() > getStartY() && vector.getY() < getEndY();
 	}
 }

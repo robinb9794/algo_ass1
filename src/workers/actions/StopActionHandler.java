@@ -17,17 +17,17 @@ public class StopActionHandler extends SuperUserInteractionHandler{
 			ButtonField button = entry.getKey();
 			String value = entry.getValue();
 			switch(value) {
-			case "Reset":
-				button.enableButton(false);
+			case "Selection":
+				button.enableButton(true);
 				break;
-			case "Save":
-				button.enableButton(false);
+			case "Fade":
+				button.enableButton(true);
 				break;
-			case "Stop":
-				button.enableButton(false);
+			case "Lens":
+				button.enableButton(true);
 				break;
 			default:
-				button.enableButton(true);
+				button.enableButton(false);
 			}
 		}
 	}

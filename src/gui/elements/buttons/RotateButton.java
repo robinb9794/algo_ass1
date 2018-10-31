@@ -2,6 +2,8 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
+import workers.actions.RotateActionHandler;
+
 public class RotateButton extends SuperButton{
 	public RotateButton() {
 		super();
@@ -16,7 +18,7 @@ public class RotateButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		RotateActionHandler.handle();
 	}
 
 }

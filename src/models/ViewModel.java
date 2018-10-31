@@ -52,6 +52,7 @@ public class ViewModel {
 		this.buttons = new HashMap<ButtonField, String>();
 		this.selectionStartPoint = new Point();
 		this.selectionEndPoint = new Point();
+		this.morphMatrix = new Matrix();
 	}
 	
 	public String getGUITitle() {

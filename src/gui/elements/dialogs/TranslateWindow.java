@@ -3,8 +3,6 @@ package gui.elements.dialogs;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
@@ -20,13 +18,7 @@ public class TranslateWindow extends JDialog{
 		setTitle("Translate");
 		setModal(true);
 		setLayout(new FlowLayout());
-		setPreferredSize(new Dimension(300, 80));
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				dispose();
-			}
-		});
+		setPreferredSize(new Dimension(300, 80));		
 	}
 	
 	public void initButtons() {

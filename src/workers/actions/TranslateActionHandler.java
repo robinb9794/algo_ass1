@@ -2,6 +2,8 @@ package workers.actions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import gui.elements.dialogs.TranslateWindow;
 import models.MorphValues;
@@ -15,26 +17,37 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 	public static void handle() {
 		resetScreenListener();
 		initDialog();
-		disableSingleButton("Translate");
 	}
 	
 	private static void initDialog() {
 		translateWindow = new TranslateWindow();
 		translateWindow.initButtons();
-		addListenerToButtons();
+		addWindowListener();
+		addListenersToButtons();
 		translateWindow.pack();
 		translateWindow.setLocationRelativeTo(null);
 		translateWindow.setVisible(true);
 	}
 	
-	private static void addListenerToButtons() {
+	private static void addWindowListener() {
+		translateWindow.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				translateWindow.dispose();
+				enableSingleButton("Save");
+			}
+		});
+	}
+	
+	private static void addListenersToButtons() {
 		translateWindow.left.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MorphValues.translateX -= 5;
-				System.out.println("translateX: " + MorphValues.translateX);
+				int translateX = -MorphValues.TRANSLATE_X;
+				int translateY = 0;
+				System.out.println("translateX: " + translateX);
 				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
-				setTranslationMatrix();
+				setTranslationMatrix(translateX, translateY);
 				morph();
 				gui.reloadScreen();
 			}
@@ -43,10 +56,11 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 		translateWindow.right.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MorphValues.translateX += 5;
-				System.out.println("translateX: " + MorphValues.translateX);
+				int translateX = MorphValues.TRANSLATE_X;
+				int translateY = 0;
+				System.out.println("translateX: " + translateX);
 				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
-				setTranslationMatrix();
+				setTranslationMatrix(translateX, translateY);
 				morph();
 				gui.reloadScreen();
 			}
@@ -55,10 +69,11 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 		translateWindow.up.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MorphValues.translateY -= 5;
-				System.out.println("translateY: " + MorphValues.translateY);
+				int translateX = 0;
+				int translateY = -MorphValues.TRANSLATE_Y;
+				System.out.println("translateY: " + translateY);
 				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
-				setTranslationMatrix();
+				setTranslationMatrix(translateX, translateY);
 				morph();
 				gui.reloadScreen();
 			}
@@ -67,18 +82,20 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 		translateWindow.down.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MorphValues.translateY += 5;
-				System.out.println("translateY: " + MorphValues.translateY);
+				int translateX = 0;
+				int translateY = MorphValues.TRANSLATE_Y;
+				System.out.println("translateY: " + translateY);
 				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
-				setTranslationMatrix();
+				setTranslationMatrix(translateX, translateY);
 				morph();
 				gui.reloadScreen();
 			}
 		});
 	}
 	
-	private static void setTranslationMatrix() {
-		Matrix translationMatrix = Matrix.translate(MorphValues.translateX, MorphValues.translateY);
-		viewModel.setMorphMatrix(translationMatrix);
+	private static void setTranslationMatrix(int translateX, int translateY) {
+		Matrix translationMatrix = Matrix.translate(translateX, translateY);
+		Matrix morphMatrix = Matrix.multiply(translationMatrix, viewModel.getMorphMatrix());
+		viewModel.setMorphMatrix(morphMatrix);
 	}
 }

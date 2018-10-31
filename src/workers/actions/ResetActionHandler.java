@@ -8,7 +8,7 @@ public class ResetActionHandler extends SuperUserInteractionHandler{
 		resetSelectionPoints();
 		resetDisplayedImage();
 		enableOrDisableButtonsAfterSelection(false);
-		disableSingleButton("Reset");
+		disableButtons();
 	}
 	
 	private static void resetSelectionPoints() {
@@ -18,5 +18,10 @@ public class ResetActionHandler extends SuperUserInteractionHandler{
 	private static void resetDisplayedImage() {
 		PixelCoordinator.setTargetPixels(viewModel.getSelectedImages().getLast().getGrabbedPixels());
 		gui.reloadScreen();
+	}
+	
+	private static void disableButtons() {
+		disableSingleButton("Reset");
+		disableSingleButton("Save");
 	}
 }

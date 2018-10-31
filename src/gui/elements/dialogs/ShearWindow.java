@@ -11,38 +11,39 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-public class TranslateWindow extends JDialog{		
-	public JButton translateLeft, translateRight, translateUp, translateDown;
+public class ShearWindow extends JDialog{
+	public JButton shearXLeft, shearXRight;
+	public JButton shearYUp, shearYDown;
 	
-	public TranslateWindow() {
-		setTitle("Translate");
+	public ShearWindow() {
+		setTitle("Shear");
 		setModal(true);
 		setLayout(new FlowLayout());
-		setPreferredSize(new Dimension(300, 80));		
+		setPreferredSize(new Dimension(300, 80));
 	}
 	
 	public void initButtons() {
 		BufferedImage buttonIcon;
 		try {
-			translateLeft = new JButton();
+			shearXLeft = new JButton();
 			buttonIcon = ImageIO.read(new URL("https://image.freepik.com/free-icon/arrow-bold-left-ios-7-interface-symbol_318-34824.jpg"));
-			translateLeft.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16,  16, Image.SCALE_SMOOTH)));
-			add(translateLeft);
+			shearXLeft.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16,  16, Image.SCALE_SMOOTH)));
+			add(shearXLeft);
 			
-			translateRight = new JButton();
+			shearXRight = new JButton();
 			buttonIcon = ImageIO.read(new URL("https://image.freepik.com/free-icon/arrow-bold-right-ios-7-symbol_318-35504.jpg"));
-			translateRight.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
-			add(translateRight);
+			shearXRight.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
+			add(shearXRight);
 			
-			translateUp = new JButton();
+			shearYUp = new JButton();
 			buttonIcon = ImageIO.read(new URL("https://image.freepik.com/free-icon/up-arrow_318-123025.jpg"));
-			translateUp.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
-			add(translateUp);
+			shearYUp.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
+			add(shearYUp);
 			
-			translateDown = new JButton();
+			shearYDown = new JButton();
 			buttonIcon = ImageIO.read(new URL("https://image.freepik.com/free-icon/side-down_318-125102.jpg"));
-			translateDown.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
-			add(translateDown);
+			shearYDown.setIcon(new ImageIcon(buttonIcon.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
+			add(shearYDown);
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}

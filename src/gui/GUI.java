@@ -61,6 +61,6 @@ public class GUI extends JFrame implements View{
 	
 	@Override
 	public void reloadScreen() {
-		repaint();
+		viewModel.getScreen().drawImage();
 	}
 }

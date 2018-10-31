@@ -35,13 +35,18 @@ public class Matrix {
 	}
 	
 	public static Matrix translate(int dx, int dy) {
-		double[][] data = {{1, 0, -dx}, {0, 1, -dy}, { 0, 0, 1}};
+		double[][] data = {{1, 0, -dx}, {0, 1, -dy}, {0, 0, 1}};
 		return new Matrix(data);
 	}
 	
 	public static Matrix rotate(int alpha) {
 		double rad = -(Math.PI * alpha / 180);
-		double[][] data = { { Math.cos(rad), -Math.sin(rad), 0 }, { Math.sin(rad), Math.cos(rad), 0 }, { 0, 0, 1 } };
+		double[][] data = { {Math.cos(rad), -Math.sin(rad), 0}, {Math.sin(rad), Math.cos(rad), 0}, {0, 0, 1} };
+		return new Matrix(data);
+	}
+	
+	public static Matrix shear(double shearX, double shearY) {
+		double[][] data = { {1, -shearX, 0}, {-shearY, 1, 0}, {0, 0, 1} };
 		return new Matrix(data);
 	}
 }

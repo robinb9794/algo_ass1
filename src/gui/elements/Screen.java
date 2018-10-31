@@ -27,7 +27,8 @@ public class Screen extends JComponent implements ImageDisplay{
 	}
 	
 	@Override
-	public void paintComponent(Graphics g) {
+	public void drawImage() {
+		Graphics g = getGraphics();
 		g.setColor(Color.BLACK);
 		g.drawRect(10, 10, viewModel.getScreenWidth(), viewModel.getScreenHeight());
 		if(viewModel.getMemoryImageSource() != null) {

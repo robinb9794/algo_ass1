@@ -39,7 +39,7 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 	}
 	
 	private static void addListenersToButtons() {
-		translateWindow.left.addActionListener(new ActionListener() {
+		translateWindow.translateLeft.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int translateX = -MorphValues.TRANSLATE_X;
@@ -50,7 +50,7 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 			}
 		});
 		
-		translateWindow.right.addActionListener(new ActionListener() {
+		translateWindow.translateRight.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int translateX = MorphValues.TRANSLATE_X;
@@ -61,7 +61,7 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 			}
 		});
 		
-		translateWindow.up.addActionListener(new ActionListener() {
+		translateWindow.translateUp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int translateX = 0;
@@ -72,7 +72,7 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 			}
 		});
 		
-		translateWindow.down.addActionListener(new ActionListener() {
+		translateWindow.translateDown.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int translateX = 0;

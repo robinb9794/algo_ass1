@@ -21,7 +21,7 @@ public class CreateHistogramActionHandler extends SuperUserInteractionHandler {
 	}
 	
 	private static boolean userHasSelectedOneImage() {
-		return viewModel.getSelectedImages().size() == 1;
+		return viewModel.getSelectedImages() != null && viewModel.getSelectedImages().size() == 1;
 	}
 	
 	private static void createHistogram() {

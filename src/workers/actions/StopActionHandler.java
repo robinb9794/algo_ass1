@@ -3,6 +3,8 @@ package workers.actions;
 import java.util.Map.Entry;
 
 import interfaces.buttons.ButtonField;
+import models.LoadedImage;
+import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
 
 public class StopActionHandler extends SuperUserInteractionHandler{
@@ -10,6 +12,7 @@ public class StopActionHandler extends SuperUserInteractionHandler{
 		isFading = false;
 		resetScreenListener();
 		enableAndDisableButtons();
+		resetDisplayedImage();
 	}
 	
 	private static void enableAndDisableButtons() {
@@ -30,5 +33,11 @@ public class StopActionHandler extends SuperUserInteractionHandler{
 				button.enableButton(false);
 			}
 		}
+	}
+	
+	private static void resetDisplayedImage() {
+		LoadedImage displayedImage = viewModel.getSelectedImages().getLast();
+		PixelCoordinator.setSourcePixels(displayedImage.getGrabbedPixels());
+		PixelCoordinator.setTargetPixels(displayedImage.getGrabbedPixels());
 	}
 }

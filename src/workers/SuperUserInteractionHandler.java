@@ -89,19 +89,20 @@ public class SuperUserInteractionHandler {
 		LoadedImage backgroundImage = viewModel.getSelectedImages().getFirst();
 		for(int i = 0; i < viewModel.getScreenWidth(); i++) {
 			for(int j = 0; j < viewModel.getScreenHeight(); j++) {
-				Vector targetVector = new Vector(i, j);
-				Vector sourceVector = Matrix.multiply(viewModel.getMorphMatrix(), targetVector);
-				int targetIndex = PixelCoordinator.getPixelIndex(i, j);
-				int sourceIndex = PixelCoordinator.getPixelIndex(sourceVector.getX(), sourceVector.getY());
-				if(pixelIsInSelectionArea(sourceVector)) {
-					int morphPixel = PixelCoordinator.getSingleSourcePixel(sourceIndex);
-					PixelCoordinator.setSingleTargetPixel(targetIndex, morphPixel);
+				Vector sourceVector = new Vector(i, j);
+				Vector targetVector = Matrix.multiply(viewModel.getMorphMatrix(), sourceVector);
+				int sourceIndex = PixelCoordinator.getPixelIndex(i, j);
+				int targetIndex = PixelCoordinator.getPixelIndex(targetVector.getX(), targetVector.getY());
+				if(pixelIsInSelectionArea(targetVector)) {
+					int morphPixel = PixelCoordinator.getSingleSourcePixel(targetIndex);
+					PixelCoordinator.setSingleTargetPixel(sourceIndex, morphPixel);
 				}else {
-					int backgroundPixel = PixelCoordinator.getSinglePixelFromImage(backgroundImage, targetIndex);
-					PixelCoordinator.setSingleTargetPixel(targetIndex, backgroundPixel);
+					int backgroundPixel = PixelCoordinator.getSinglePixelFromImage(backgroundImage, sourceIndex);
+					PixelCoordinator.setSingleTargetPixel(sourceIndex, backgroundPixel);
 				}
 			}
 		}
+		gui.reloadScreen();
 	}
 	
 	protected static int getStartX() {
@@ -118,6 +119,14 @@ public class SuperUserInteractionHandler {
 	
 	protected static int getEndY() {
 		return Math.max((int) viewModel.getSelectionStartPoint().getY(), (int) viewModel.getSelectionEndPoint().getY());
+	}
+	
+	protected static int getCenterX() {
+		return getStartX() + ((getEndX() - getStartX()) / 2);
+	}
+	
+	protected static int getCenterY() {
+		return getStartY() + ((getEndY() - getStartY()) / 2);
 	}
 	
 	private static boolean pixelIsInSelectionArea(Vector vector) {

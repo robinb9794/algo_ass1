@@ -8,7 +8,6 @@ import java.awt.event.WindowEvent;
 import gui.elements.dialogs.TranslateWindow;
 import models.MorphValues;
 import models.math.Matrix;
-import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
 
 public class TranslateActionHandler extends SuperUserInteractionHandler{
@@ -46,10 +45,8 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 				int translateX = -MorphValues.TRANSLATE_X;
 				int translateY = 0;
 				System.out.println("translateX: " + translateX);
-				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
 				setTranslationMatrix(translateX, translateY);
 				morph();
-				gui.reloadScreen();
 			}
 		});
 		
@@ -59,10 +56,8 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 				int translateX = MorphValues.TRANSLATE_X;
 				int translateY = 0;
 				System.out.println("translateX: " + translateX);
-				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
 				setTranslationMatrix(translateX, translateY);
 				morph();
-				gui.reloadScreen();
 			}
 		});
 		
@@ -72,10 +67,8 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 				int translateX = 0;
 				int translateY = -MorphValues.TRANSLATE_Y;
 				System.out.println("translateY: " + translateY);
-				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
 				setTranslationMatrix(translateX, translateY);
 				morph();
-				gui.reloadScreen();
 			}
 		});
 		
@@ -85,10 +78,8 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 				int translateX = 0;
 				int translateY = MorphValues.TRANSLATE_Y;
 				System.out.println("translateY: " + translateY);
-				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
 				setTranslationMatrix(translateX, translateY);
 				morph();
-				gui.reloadScreen();
 			}
 		});
 	}

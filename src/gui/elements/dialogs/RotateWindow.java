@@ -7,13 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 public class RotateWindow extends JDialog{
-	public JButton clockwise, counterClockwise;
+	public JButton clockwise;
 	
 	public RotateWindow() {
 		setTitle("Rotate");
 		setModal(true);
 		setLayout(new FlowLayout());
-		clockwise = new JButton("Rotate clockwise");
+		clockwise = new JButton("Rotate");
 		add(clockwise);
 		setPreferredSize(new Dimension(200, 80));
 	}

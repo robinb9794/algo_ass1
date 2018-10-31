@@ -32,7 +32,6 @@ public class ViewModel {
 	private boolean guiIsLoaded;
 	private ImageBar imageBar;
 	
-	//private LoadedImage selectedImage;
 	private LinkedList<LoadedImage> selectedImages;
 	
 	private Map<ButtonField, String> buttons;

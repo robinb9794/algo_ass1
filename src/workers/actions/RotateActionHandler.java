@@ -44,7 +44,7 @@ public class RotateActionHandler extends SuperUserInteractionHandler{
 			public void actionPerformed(ActionEvent e) {
 				int rotateAlpha = MorphValues.ROTATE_ALPHA;
 				System.out.println("rotateAlpha: " + rotateAlpha);
-				PixelCoordinator.setTargetPixels(viewModel.getTargetPixels());
+				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
 				setRotationMatrix(rotateAlpha);
 				morph();
 				gui.reloadScreen();
@@ -53,20 +53,12 @@ public class RotateActionHandler extends SuperUserInteractionHandler{
 	}
 	
 	private static void setRotationMatrix(int rotateAlpha) {
-		Matrix translationToOriginMatrix = Matrix.translate(-getRotationCenterX(), -getRotationCenterY()); 
+		Matrix shiftMatrix = Matrix.translate(-getCenterX(), -getCenterY()); 
 		Matrix rotationMatrix = Matrix.rotate(rotateAlpha); 
-		Matrix rotationAtOriginMatrix = Matrix.multiply(translationToOriginMatrix, rotationMatrix); 
-		Matrix translationToTargetMatrix = Matrix.translate(getRotationCenterX(), getRotationCenterY()); 
-		Matrix rotateAtTargetMatrix = Matrix.multiply(rotationAtOriginMatrix, translationToTargetMatrix); 		
-		Matrix morphMatrix = Matrix.multiply(rotateAtTargetMatrix, viewModel.getMorphMatrix());
+		Matrix rotationAtOriginMatrix = Matrix.multiply(shiftMatrix, rotationMatrix);
+		shiftMatrix = Matrix.translate(getCenterX(), getCenterY());
+		Matrix backToSourceMatrix = Matrix.multiply(shiftMatrix, rotationAtOriginMatrix);
+		Matrix morphMatrix = Matrix.multiply(backToSourceMatrix, viewModel.getMorphMatrix());
 		viewModel.setMorphMatrix(morphMatrix);
-	}
-	
-	private static int getRotationCenterX() {
-		return getStartX() + ((getEndX() - getStartX()) / 2);
-	}
-	
-	private static int getRotationCenterY() {
-		return getStartY() + ((getEndY() - getStartY()) / 2);
 	}
 }

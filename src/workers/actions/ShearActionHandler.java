@@ -20,11 +20,11 @@ public class ShearActionHandler extends SuperUserInteractionHandler{
 	
 	private static void initDialog() {
 		shearWindow = new ShearWindow();
-		shearWindow.initButtons();
+		shearWindow.initButtons();		
 		addWindowListener();
 		addListenersToButtons();
-		shearWindow.pack();
 		shearWindow.setLocationRelativeTo(null);
+		shearWindow.pack();
 		shearWindow.setVisible(true);
 	}
 	
@@ -44,7 +44,6 @@ public class ShearActionHandler extends SuperUserInteractionHandler{
 			public void actionPerformed(ActionEvent e) {
 				double shearX = -MorphValues.SHEAR_X;
 				double shearY = 0;
-				System.out.println("shearX: " + shearX);
 				setShearMatrix(shearX, shearY);
 				morph();
 			}
@@ -55,7 +54,6 @@ public class ShearActionHandler extends SuperUserInteractionHandler{
 			public void actionPerformed(ActionEvent e) {
 				double shearX = MorphValues.SHEAR_X;
 				double shearY = 0;
-				System.out.println("shearX: " + shearX);
 				setShearMatrix(shearX, shearY);
 				morph();
 			}
@@ -66,7 +64,6 @@ public class ShearActionHandler extends SuperUserInteractionHandler{
 			public void actionPerformed(ActionEvent e) {
 				double shearX = 0;
 				double shearY = -MorphValues.SHEAR_Y;
-				System.out.println("shearY: " + shearY);
 				setShearMatrix(shearX, shearY);
 				morph();
 			}
@@ -77,7 +74,6 @@ public class ShearActionHandler extends SuperUserInteractionHandler{
 			public void actionPerformed(ActionEvent e) {
 				double shearX = 0;
 				double shearY = MorphValues.SHEAR_Y;
-				System.out.println("shearY: " + shearY);
 				setShearMatrix(shearX, shearY);
 				morph();
 			}
@@ -85,8 +81,13 @@ public class ShearActionHandler extends SuperUserInteractionHandler{
 	}
 	
 	private static void setShearMatrix(double shearX, double shearY) {
+		Matrix shiftMatrix = Matrix.translate(-getCenterX(), -getCenterY());
+		Matrix morphMatrix = viewModel.getMorphMatrix();
+		morphMatrix = Matrix.multiply(shiftMatrix, morphMatrix);
 		Matrix shearMatrix = Matrix.shear(shearX, shearY);
-		Matrix morphMatrix = Matrix.multiply(shearMatrix, viewModel.getMorphMatrix());
+		morphMatrix = Matrix.multiply(shearMatrix, morphMatrix);
+		shiftMatrix = Matrix.translate(getCenterX(), getCenterY());
+		morphMatrix = Matrix.multiply(shiftMatrix, morphMatrix);
 		viewModel.setMorphMatrix(morphMatrix);
 	}
 }

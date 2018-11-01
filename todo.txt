@@ -1,1 +1,12 @@
+- scale
+- lines
+- circles
+- save
 
+- block image bar when morphing / ask to save
+- histgram from morphed image
+
+- scale smaller
+- rotate counter clockwise
+
+- add more images

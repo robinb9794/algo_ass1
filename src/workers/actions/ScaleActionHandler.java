@@ -5,14 +5,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import gui.elements.dialogs.RotateWindow;
+import gui.elements.dialogs.ScaleWindow;
 import models.MorphValues;
 import models.math.Matrix;
 import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
 
-public class RotateActionHandler extends SuperUserInteractionHandler{
-	private static RotateWindow rotateWindow;
+public class ScaleActionHandler extends SuperUserInteractionHandler {
+	private static ScaleWindow scaleWindow;
 	
 	public static void handle() {
 		resetScreenListener();
@@ -20,42 +20,43 @@ public class RotateActionHandler extends SuperUserInteractionHandler{
 	}
 	
 	private static void initDialog() {
-		rotateWindow = new RotateWindow();
+		scaleWindow = new ScaleWindow();
 		addWindowListener();
-		addListenersToButtons();
-		rotateWindow.pack();
-		rotateWindow.setLocationRelativeTo(null);
-		rotateWindow.setVisible(true);
+		addListenerToButton();
+		scaleWindow.pack();
+		scaleWindow.setLocationRelativeTo(null);
+		scaleWindow.setVisible(true);
 	}
 	
 	private static void addWindowListener() {
-		rotateWindow.addWindowListener(new WindowAdapter() {
+		scaleWindow.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				rotateWindow.dispose();
 				enableSingleButton("Save");
+				scaleWindow.dispose();
 			}
 		});
 	}
 	
-	private static void addListenersToButtons() {
-		rotateWindow.clockwise.addActionListener(new ActionListener() {
+	private static void addListenerToButton() {
+		scaleWindow.scale.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rotateAlpha = MorphValues.ROTATE_ALPHA;
+				System.out.println("Hier");
+				double scale = MorphValues.SCALE;
 				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
-				setRotationMatrix(rotateAlpha);
+				setScaleMatrix(scale);
 				morph();
 			}
 		});
 	}
 	
-	private static void setRotationMatrix(int rotateAlpha) {
+	private static void setScaleMatrix(double scale) {
 		Matrix shiftMatrix = Matrix.translate(-getCenterX(), -getCenterY());
 		Matrix morphMatrix = viewModel.getMorphMatrix();
 		morphMatrix = Matrix.multiply(shiftMatrix, morphMatrix);
-		Matrix rotationMatrix = Matrix.rotate(rotateAlpha); 
-		morphMatrix = Matrix.multiply(rotationMatrix, morphMatrix);
+		Matrix scaleMatrix = Matrix.scale(scale);
+		morphMatrix = Matrix.multiply(scaleMatrix, morphMatrix);
 		shiftMatrix = Matrix.translate(getCenterX(), getCenterY());
 		morphMatrix = Matrix.multiply(shiftMatrix, morphMatrix);
 		viewModel.setMorphMatrix(morphMatrix);

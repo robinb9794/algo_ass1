@@ -2,6 +2,8 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
+import workers.actions.ScaleActionHandler;
+
 public class ScaleButton extends SuperButton{
 	public ScaleButton() {
 		super();
@@ -16,7 +18,7 @@ public class ScaleButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		ScaleActionHandler.handle();
 	}
 
 }

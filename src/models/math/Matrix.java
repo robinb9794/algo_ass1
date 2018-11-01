@@ -49,4 +49,9 @@ public class Matrix {
 		double[][] data = { {1, -shearX, 0}, {-shearY, 1, 0}, {0, 0, 1} };
 		return new Matrix(data);
 	}
+	
+	public static Matrix scale(double scale) {
+		double[][] data = { {1/scale, 0, 0}, {0, 1/scale, 0}, {0, 0, 1} };
+		return new Matrix(data);
+	}
 }

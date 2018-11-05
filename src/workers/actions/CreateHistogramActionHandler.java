@@ -9,28 +9,27 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import models.LoadedImage;
+import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
 
 public class CreateHistogramActionHandler extends SuperUserInteractionHandler {
 	public static void handle() {
-		if(userHasSelectedOneImage()) {
+		if(screenIsLoaded())
 			createHistogram();
-		}else {
-			showErrorDialog("Please select exactly one image.");
-		}
+		else
+			showErrorDialog("First load images.");
 	}
 	
-	private static boolean userHasSelectedOneImage() {
-		return viewModel.getSelectedImages() != null && viewModel.getSelectedImages().size() == 1;
+	private static boolean screenIsLoaded() {
+		return viewModel != null && viewModel.getScreen() != null;
 	}
 	
 	private static void createHistogram() {
 		Writer writer;
 		try {
-			LoadedImage displayedImage = viewModel.getSelectedImages().get(0);
 			Map<String, Integer> histogram = new HashMap<String, Integer>();
 			for (int i = 0; i < viewModel.getScreenWidth() * viewModel.getScreenHeight(); i++) {
-				String color = binaryToDec(Integer.toBinaryString(displayedImage.getGrabbedPixels()[i]));
+				String color = binaryToDec(Integer.toBinaryString(PixelCoordinator.getSingleTargetPixel(i)));
 				int number = 1;
 				if (!histogram.containsKey(color)) {
 					histogram.put(color, number);

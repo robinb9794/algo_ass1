@@ -1,12 +1,9 @@
 package gui.elements;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JComponent;
@@ -27,10 +24,7 @@ public class Screen extends JComponent implements ImageDisplay{
 	}
 	
 	@Override
-	public void drawImage() {
-		Graphics g = getGraphics();
-		g.setColor(Color.BLACK);
-		g.drawRect(10, 10, viewModel.getScreenWidth(), viewModel.getScreenHeight());
+	public void paintComponent(Graphics g) {
 		if(viewModel.getMemoryImageSource() != null) {
 			viewModel.getMemoryImageSource().newPixels();
 			this.displayedImage = createImage(viewModel.getMemoryImageSource());

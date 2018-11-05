@@ -2,6 +2,8 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
+import workers.actions.SaveActionHandler;
+
 public class SaveButton extends SuperButton{
 	public SaveButton() {
 		super();
@@ -16,7 +18,6 @@ public class SaveButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		SaveActionHandler.handle();
 	}
-
 }

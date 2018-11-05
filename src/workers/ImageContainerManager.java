@@ -20,29 +20,37 @@ public class ImageContainerManager extends GUIManager {
 	private static ImageBar imageBar;
 	private static GUIElement scrollBar;
 	
+	private static int screenWidth, screenHeight;
+	
 	public static void init() {
 		imageBar = (ImageBar) guiElementFactory.getGUIElement("ImageContainer");
 	}
 	
 	public static void startWork() {
+		setScreenValues();
 		initImageBar();
 		handleFiles(viewModel.getSelectedFiles());
 		makeImageBarScrollable();
 		updateGUIAndViewModel();		
 	}
 	
+	private static void setScreenValues() {
+		screenWidth = viewModel.getScreenWidth();
+		screenHeight = viewModel.getScreenHeight();
+	}
+	
 	private static void initImageBar() {
 		imageBar.init();		
 	}
 	
-	private static void handleFiles(File[] files) {
+	public static void handleFiles(File[] files) {
 		for(int i = 0; i < files.length; i++) {
 			File file = files[i];
 			if(file.isDirectory()) {
 				File[] filesFromDirectory = file.listFiles();
 				handleFiles(filesFromDirectory);
 			}else if(fileIsImage(file)){
-				handleImage(file, i);
+				handleImage(file);
 			}
 		}	
 	}
@@ -51,30 +59,30 @@ public class ImageContainerManager extends GUIManager {
 		return file.getPath().endsWith("png") || file.getPath().endsWith("jpg");
 	}
 	
-	private static void handleImage(File selectedFile, int i) {
+	public static void handleImage(File selectedFile) {
 		try {
 			Image originalImage = ImageIO.read(selectedFile);
-			int[] grabbedPixels = getGrabbedPixels(originalImage, viewModel.getScreenWidth(), viewModel.getScreenHeight());
+			int[] grabbedPixels = getGrabbedPixels(originalImage);
 			ImageIcon icon = new ImageIcon(originalImage.getScaledInstance(95, 95, Image.SCALE_SMOOTH));
-			LoadedImage loadedImage = getLoadedImage(originalImage, icon, grabbedPixels, i);
-			createIconAndAddToBar(originalImage, loadedImage);
+			LoadedImage loadedImage = getLoadedImage(icon, grabbedPixels);
+			createIconAndAddToBar(loadedImage);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}		
 	}	
 	
-	private static LoadedImage getLoadedImage(Image originalImage, ImageIcon icon, int[] grabbedPixels, int i) {
-		LoadedImage loadedImage = new LoadedImage(originalImage, icon, grabbedPixels, i);
+	public static LoadedImage getLoadedImage(ImageIcon icon, int[] grabbedPixels) {
+		LoadedImage loadedImage = new LoadedImage(icon, grabbedPixels);
 		viewModel.addLoadedImage(loadedImage);
 		return loadedImage;
 	}
 	
-	private static int[] getGrabbedPixels(Image originalImage, int width, int height) {
+	private static int[] getGrabbedPixels(Image originalImage) {
 		int[] pixels;
 		try {
-			originalImage = getScaledImage(originalImage, width, height);
-			pixels = new int[width * height];
-			PixelGrabber pixelGrabber = new PixelGrabber(originalImage, 0, 0, width, height, pixels, 0, width);
+			originalImage = getScaledImage(originalImage);
+			pixels = new int[screenWidth * screenHeight];
+			PixelGrabber pixelGrabber = new PixelGrabber(originalImage, 0, 0, screenWidth, screenHeight, pixels, 0, screenWidth);
 			pixelGrabber.grabPixels();
 			return pixels;
 		}catch(Exception ex) {
@@ -83,16 +91,16 @@ public class ImageContainerManager extends GUIManager {
 		return null;
 	}
 	
-	private static BufferedImage getScaledImage(Image originalImage, int width, int height) {
-		Image tmp = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		BufferedImage scaledImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+	private static BufferedImage getScaledImage(Image originalImage) {
+		Image tmp = originalImage.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+		BufferedImage scaledImage = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = scaledImage.createGraphics();
 		g2d.drawImage(tmp, 0, 0, null);
 		g2d.dispose();
 		return scaledImage;
 	}
 	
-	private static void createIconAndAddToBar(Image originalImage, LoadedImage loadedImage) {
+	public static void createIconAndAddToBar(LoadedImage loadedImage) {
 		GUIElement imageField = getInitializedImageField(loadedImage);				
 		imageBar.addImageField(imageField);
 	}
@@ -114,4 +122,16 @@ public class ImageContainerManager extends GUIManager {
 		gui.addElement(BorderLayout.SOUTH, scrollBar);
 		viewModel.setGUIIsLoaded(true);
 	}
+	
+	public static void reloadImageBar() {
+		imageBar.reload();
+	}
+	
+	public static void enableImageBar() {
+		imageBar.enableImages();
+	}
+	
+	public static void blockImageBar() {
+		imageBar.blockImages();
+	}	
 }

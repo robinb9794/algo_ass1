@@ -39,24 +39,36 @@ public class RotateActionHandler extends SuperUserInteractionHandler{
 	}
 	
 	private static void addListenersToButtons() {
-		rotateWindow.clockwise.addActionListener(new ActionListener() {
+		rotateWindow.rotateClockwise.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int rotateAlpha = MorphValues.ROTATE_ALPHA;
 				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
-				setRotationMatrix(rotateAlpha);
+				setRotationMatrix(rotateAlpha, true);
+				morph();
+			}
+		});
+		
+		rotateWindow.rotateCounterClockwise.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int rotateAlpha = MorphValues.ROTATE_ALPHA;
+				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
+				setRotationMatrix(rotateAlpha, false);
 				morph();
 			}
 		});
 	}
 	
-	private static void setRotationMatrix(int rotateAlpha) {
-		Matrix shiftMatrix = Matrix.translate(-getCenterX(), -getCenterY());
+	private static void setRotationMatrix(int rotateAlpha, boolean shouldRotateClockwise) {
+		int centerX = (int) viewModel.getSelectionCenter().getX();
+		int centerY = (int) viewModel.getSelectionCenter().getY();
+		Matrix shiftMatrix = Matrix.translate(-centerX, -centerY);
 		Matrix morphMatrix = viewModel.getMorphMatrix();
 		morphMatrix = Matrix.multiply(shiftMatrix, morphMatrix);
-		Matrix rotationMatrix = Matrix.rotate(rotateAlpha); 
+		Matrix rotationMatrix = shouldRotateClockwise ? Matrix.rotateClockwise(rotateAlpha) : Matrix.rotateCounterClockwise(rotateAlpha); 
 		morphMatrix = Matrix.multiply(rotationMatrix, morphMatrix);
-		shiftMatrix = Matrix.translate(getCenterX(), getCenterY());
+		shiftMatrix = Matrix.translate(centerX, centerY);
 		morphMatrix = Matrix.multiply(shiftMatrix, morphMatrix);
 		viewModel.setMorphMatrix(morphMatrix);
 	}

@@ -37,6 +37,7 @@ public class ViewModel {
 	private Map<ButtonField, String> buttons;
 	
 	private Point selectionStartPoint, selectionEndPoint;
+	private Point selectionCenter;
 	
 	private Matrix morphMatrix;
 	
@@ -51,6 +52,7 @@ public class ViewModel {
 		this.buttons = new HashMap<ButtonField, String>();
 		this.selectionStartPoint = new Point();
 		this.selectionEndPoint = new Point();
+		this.selectionCenter = new Point();
 		this.morphMatrix = new Matrix();
 	}
 	
@@ -150,8 +152,7 @@ public class ViewModel {
 		LoadedImage nextDisplayedImage = null;
 		if(this.selectedImages.size() > 0) {
 			nextDisplayedImage = this.selectedImages.getLast();
-			PixelCoordinator.setSourcePixels(nextDisplayedImage.getGrabbedPixels());
-			PixelCoordinator.setTargetPixels(nextDisplayedImage.getGrabbedPixels());
+			PixelCoordinator.setSourceAndTargetPixels(nextDisplayedImage.getGrabbedPixels());
 		}else {
 			PixelCoordinator.resetSourcePixels();
 			PixelCoordinator.resetTargetPixels();
@@ -198,9 +199,30 @@ public class ViewModel {
 		this.selectionEndPoint.setLocation(x, y);
 	}
 	
+	public void setSelectionCenter(){
+		int startX = Math.min((int) getSelectionStartPoint().getX(), (int) getSelectionEndPoint().getX());
+		int endX = Math.max((int) getSelectionStartPoint().getX(), (int) getSelectionEndPoint().getX());
+		int startY = Math.min((int) getSelectionStartPoint().getY(), (int) getSelectionEndPoint().getY());
+		int endY = Math.max((int) getSelectionStartPoint().getY(), (int) getSelectionEndPoint().getY());
+		int centerX = startX + ((endX - startX) / 2);
+		int centerY = startY + ((endY - startY) / 2);
+		this.selectionCenter.setLocation(centerX, centerY);
+	}
+	
+	public void upateSelectionCenter(int x, int y) {
+		int centerX = (int) this.selectionCenter.getX() + x;
+		int centerY = (int) this.selectionCenter.getY();
+		this.selectionCenter.setLocation(centerX, centerY);
+	}
+	
+	public Point getSelectionCenter() {
+		return this.selectionCenter;
+	}
+	
 	public void resetSelectionPoints() {
 		this.selectionStartPoint = new Point();
 		this.selectionEndPoint = new Point();
+		this.selectionCenter = new Point();
 	}
 	
 	public Matrix getMorphMatrix() {

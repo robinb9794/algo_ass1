@@ -35,9 +35,8 @@ public class SuperUserInteractionHandler {
 		for(Entry<ButtonField, String> entry : viewModel.getButtons().entrySet()) {
 			ButtonField button = entry.getKey();
 			String buttonValue = entry.getValue();
-		    if(buttonValue.equals(value)) {
+		    if(buttonValue.equals(value))
 		    	button.enableButton(true);
-		    }
 		}
 	}
 	
@@ -45,13 +44,23 @@ public class SuperUserInteractionHandler {
 		for(Entry<ButtonField, String> entry : viewModel.getButtons().entrySet()) {
 			ButtonField button = entry.getKey();
 			String buttonValue = entry.getValue();
-		    if(buttonValue.equals(value)) {
+		    if(buttonValue.equals(value))
 		    	button.enableButton(false);
-		    }
 		}
 	}
 	
-	protected static void enableOrDisableButtonsAfterSelection(boolean enable) {
+	protected static void disableAllButtonsExceptOf(String value) {
+		for(Entry<ButtonField, String> entry : viewModel.getButtons().entrySet()) {
+			ButtonField button = entry.getKey();
+			String buttonValue = entry.getValue();
+		    if(buttonValue.equals(value))
+		    	button.enableButton(true);
+		    else
+		    	button.enableButton(false);
+		}
+	}
+	
+	protected static void enableOrDisableButtonsMorphButtons(boolean enable) {
 		for(Entry<ButtonField, String> entry : viewModel.getButtons().entrySet()) {
 			ButtonField button = entry.getKey();
 			String value = entry.getValue();
@@ -77,12 +86,26 @@ public class SuperUserInteractionHandler {
 		    case "Reset":
 		    	button.enableButton(enable);
 		    	break;
+		    case "Save":
+		    	button.enableButton(enable);
+		    	break;
+	    	default:
+	    		button.enableButton(false);
+	    		break;
 		    }
 		}
 	}
 	
 	protected static void resetScreenListener() {
 		viewModel.getScreen().resetMouseActions();
+	}
+	
+	protected static void blockImageBar() {
+		ImageContainerManager.blockImageBar();
+	}
+	
+	protected static void enableImageBar() {
+		ImageContainerManager.enableImageBar();
 	}
 	
 	protected static void morph() {
@@ -125,12 +148,4 @@ public class SuperUserInteractionHandler {
 	protected static int getEndY() {
 		return Math.max((int) viewModel.getSelectionStartPoint().getY(), (int) viewModel.getSelectionEndPoint().getY());
 	}
-	
-	protected static int getCenterX() {
-		return getStartX() + ((getEndX() - getStartX()) / 2);
-	}
-	
-	protected static int getCenterY() {
-		return getStartY() + ((getEndY() - getStartY()) / 2);
-	}	
 }

@@ -43,6 +43,10 @@ public class GUIManager {
 		gui.packAndShow();				
 	}
 	
+	public static void initUserInteractionHandler() {
+		SuperUserInteractionHandler.init(viewModel, gui);
+	}
+	
 	public static void initButtonContainer() {
 		ButtonContainerManager.init();
 		ButtonContainerManager.startWork();
@@ -69,9 +73,5 @@ public class GUIManager {
 	public static void initImageContainer() {
 		ImageContainerManager.init();
 		ImageContainerManager.startWork();
-	}
-	
-	public static void initUserInteractionHandler() {
-		SuperUserInteractionHandler.init(viewModel, gui);
 	}
 }

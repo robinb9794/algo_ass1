@@ -22,7 +22,7 @@ public class ScaleActionHandler extends SuperUserInteractionHandler {
 	private static void initDialog() {
 		scaleWindow = new ScaleWindow();
 		addWindowListener();
-		addListenerToButton();
+		addListenersToButtons();
 		scaleWindow.pack();
 		scaleWindow.setLocationRelativeTo(null);
 		scaleWindow.setVisible(true);
@@ -38,12 +38,21 @@ public class ScaleActionHandler extends SuperUserInteractionHandler {
 		});
 	}
 	
-	private static void addListenerToButton() {
-		scaleWindow.scale.addActionListener(new ActionListener() {
+	private static void addListenersToButtons() {
+		scaleWindow.scaleBigger.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hier");
-				double scale = MorphValues.SCALE;
+				double scale = MorphValues.SCALE_BIGGER;
+				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
+				setScaleMatrix(scale);
+				morph();
+			}
+		});
+		
+		scaleWindow.scaleSmaller.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double scale = MorphValues.SCALE_SMALLER;
 				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
 				setScaleMatrix(scale);
 				morph();
@@ -52,12 +61,14 @@ public class ScaleActionHandler extends SuperUserInteractionHandler {
 	}
 	
 	private static void setScaleMatrix(double scale) {
-		Matrix shiftMatrix = Matrix.translate(-getCenterX(), -getCenterY());
+		int centerX = (int) viewModel.getSelectionCenter().getX();
+		int centerY = (int) viewModel.getSelectionCenter().getY();
+		Matrix shiftMatrix = Matrix.translate(-centerX, -centerY);
 		Matrix morphMatrix = viewModel.getMorphMatrix();
 		morphMatrix = Matrix.multiply(shiftMatrix, morphMatrix);
 		Matrix scaleMatrix = Matrix.scale(scale);
 		morphMatrix = Matrix.multiply(scaleMatrix, morphMatrix);
-		shiftMatrix = Matrix.translate(getCenterX(), getCenterY());
+		shiftMatrix = Matrix.translate(centerX, centerY);
 		morphMatrix = Matrix.multiply(shiftMatrix, morphMatrix);
 		viewModel.setMorphMatrix(morphMatrix);
 	}

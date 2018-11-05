@@ -1,9 +1,6 @@
 package gui.elements.bar;
 
-
 import java.awt.Color;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -46,5 +43,15 @@ public class ImageField extends JPanel implements DisplayedImageContainer{
 	@Override
 	public void setContainerBackground(Color color) {
 		setBackground(color);
+	}
+	
+	@Override
+	public void enableDisplayedImage() {
+		clickableImage.enableImage();
+	}
+
+	@Override
+	public void blockDisplayedImage() {
+		clickableImage.blockImage();
 	}
 }

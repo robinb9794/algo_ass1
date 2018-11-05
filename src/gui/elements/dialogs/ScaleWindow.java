@@ -7,14 +7,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 public class ScaleWindow extends JDialog{
-	public JButton scale;
+	public JButton scaleBigger, scaleSmaller;
 	
 	public ScaleWindow() {
 		setTitle("Scale");
 		setModal(true);
 		setLayout(new FlowLayout());
-		scale = new JButton("Scale");
-		add(scale);
+		scaleSmaller = new JButton("Smaller");
+		add(scaleSmaller);
+		scaleBigger = new JButton("Bigger");
+		add(scaleBigger);
 		setPreferredSize(new Dimension(200, 80));
 	}
 }

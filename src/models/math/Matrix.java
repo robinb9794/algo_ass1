@@ -39,9 +39,15 @@ public class Matrix {
 		return new Matrix(data);
 	}
 	
-	public static Matrix rotate(int alpha) {
+	public static Matrix rotateClockwise(int alpha) {
 		double rad = -(Math.PI * alpha / 180);
 		double[][] data = { {Math.cos(rad), -Math.sin(rad), 0}, {Math.sin(rad), Math.cos(rad), 0}, {0, 0, 1} };
+		return new Matrix(data);
+	}
+	
+	public static Matrix rotateCounterClockwise(int alpha) {
+		double rad = -(Math.PI * alpha / 180);
+		double[][] data = { {Math.cos(rad), Math.sin(rad), 0}, {-Math.sin(rad), Math.cos(rad), 0}, {0, 0, 1} };
 		return new Matrix(data);
 	}
 	

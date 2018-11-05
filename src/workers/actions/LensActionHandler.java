@@ -10,6 +10,7 @@ import workers.SuperUserInteractionHandler;
 public class LensActionHandler extends SuperUserInteractionHandler {
 	public static void handle() {
 		if(userHasSelectedImagesToLens()) {
+			disableAllButtonsExceptOf("Reset");
 			resetScreenListener();
 			addMouseMotionListenerToScreen();
 		}else
@@ -21,15 +22,13 @@ public class LensActionHandler extends SuperUserInteractionHandler {
 	}
 	
 	private static void addMouseMotionListenerToScreen() {
-		viewModel.getScreen().addCustomMouseMotionListener(new MouseMotionAdapter() {
-			
+		viewModel.getScreen().addCustomMouseMotionListener(new MouseMotionAdapter() {			
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				int mouseX = e.getX();
 				int mouseY = e.getY();
 				lens(mouseX, mouseY);
-			}
-			
+			}			
 		});
 	}
 	

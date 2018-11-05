@@ -6,8 +6,10 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import interfaces.GUIElement;
+import interfaces.LoadingScreen;
 import models.ViewModel;
 import workers.GUIManager;
+import workers.ImageContainerManager;
 
 public class ImageChooser extends JFileChooser implements GUIElement{
 	private ViewModel viewModel;
@@ -29,9 +31,22 @@ public class ImageChooser extends JFileChooser implements GUIElement{
 	private void handleUserAction(int returnValue) {
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			File[] selectedFiles = getSelectedFiles();
-			viewModel.setSelectedFiles(selectedFiles);
-			tellGUIManagerToBuild();
+			if(alreadyLoadedImages()) {
+				addMoreImages(selectedFiles);
+			}
+			else {
+				viewModel.setSelectedFiles(selectedFiles);
+				tellGUIManagerToBuild();
+			}
 		}
+	}
+	
+	private boolean alreadyLoadedImages() {
+		return viewModel.getLoadedImages().size() > 0;
+	}
+	
+	private void addMoreImages(File[] selectedFiles) {
+		ImageContainerManager.handleFiles(selectedFiles);
 	}
 	
 	private void tellGUIManagerToBuild() {

@@ -39,5 +39,6 @@ public class StopActionHandler extends SuperUserInteractionHandler{
 		LoadedImage displayedImage = viewModel.getSelectedImages().getLast();
 		PixelCoordinator.setSourcePixels(displayedImage.getGrabbedPixels());
 		PixelCoordinator.setTargetPixels(displayedImage.getGrabbedPixels());
+		gui.reloadScreen();
 	}
 }

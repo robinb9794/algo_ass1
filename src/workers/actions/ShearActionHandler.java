@@ -81,12 +81,14 @@ public class ShearActionHandler extends SuperUserInteractionHandler{
 	}
 	
 	private static void setShearMatrix(double shearX, double shearY) {
-		Matrix shiftMatrix = Matrix.translate(-getCenterX(), -getCenterY());
+		int centerX = (int) viewModel.getSelectionCenter().getX();
+		int centerY = (int) viewModel.getSelectionCenter().getY();
+		Matrix shiftMatrix = Matrix.translate(-centerX, -centerY);
 		Matrix morphMatrix = viewModel.getMorphMatrix();
 		morphMatrix = Matrix.multiply(shiftMatrix, morphMatrix);
 		Matrix shearMatrix = Matrix.shear(shearX, shearY);
 		morphMatrix = Matrix.multiply(shearMatrix, morphMatrix);
-		shiftMatrix = Matrix.translate(getCenterX(), getCenterY());
+		shiftMatrix = Matrix.translate(centerX, centerY);
 		morphMatrix = Matrix.multiply(shiftMatrix, morphMatrix);
 		viewModel.setMorphMatrix(morphMatrix);
 	}

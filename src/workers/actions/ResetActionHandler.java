@@ -1,16 +1,19 @@
 package workers.actions;
 
+import models.LoadedImage;
 import models.math.Matrix;
 import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
 
 public class ResetActionHandler extends SuperUserInteractionHandler{
 	public static void handle() {
+		enableImageBar();
 		resetSelectionPoints();
 		resetDisplayedImage();
 		resetMatrix();
-		enableOrDisableButtonsAfterSelection(false);
-		disableButtons();
+		enableOrDisableButtonsMorphButtons(false);
+		disableAndEnableButtons();
+		resetScreenListener();
 	}
 	
 	private static void resetSelectionPoints() {
@@ -18,7 +21,9 @@ public class ResetActionHandler extends SuperUserInteractionHandler{
 	}
 	
 	private static void resetDisplayedImage() {
-		PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
+		LoadedImage displayedImage = viewModel.getSelectedImages().getLast();
+		PixelCoordinator.setSourcePixels(displayedImage.getGrabbedPixels());
+		PixelCoordinator.setTargetPixels(displayedImage.getGrabbedPixels());
 		gui.reloadScreen();
 	}
 	
@@ -27,8 +32,11 @@ public class ResetActionHandler extends SuperUserInteractionHandler{
 		viewModel.setMorphMatrix(matrix);;
 	}
 	
-	private static void disableButtons() {
+	private static void disableAndEnableButtons() {
 		disableSingleButton("Reset");
 		disableSingleButton("Save");
+		enableSingleButton("Selection");
+		enableSingleButton("Fade");
+		enableSingleButton("Lens");
 	}
 }

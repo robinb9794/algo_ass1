@@ -1,8 +1,5 @@
 package workers.actions;
 
-import java.util.Map.Entry;
-
-import interfaces.buttons.ButtonField;
 import models.LoadedImage;
 import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
@@ -11,7 +8,7 @@ public class FadeActionHandler extends SuperUserInteractionHandler{
 	public static void handle() {
 		if(userHasSelectedImagesToFade()) {
 			resetScreenListener();
-			disableOtherButtons();
+			disableAllButtonsExceptOf("Stop");
 			new Thread() {
 				@Override
 				public void run() {
@@ -35,16 +32,6 @@ public class FadeActionHandler extends SuperUserInteractionHandler{
 			}.start();
 		}else {
 			showErrorDialog("Please select at least two images.");
-		}
-	}
-	
-	private static void disableOtherButtons() {
-		for(Entry<ButtonField, String> entry : viewModel.getButtons().entrySet()) {
-		    if(entry.getValue().equals("Stop")) {
-		    	entry.getKey().enableButton(true);
-		    }else {
-		    	entry.getKey().enableButton(false);
-		    }
 		}
 	}
 		

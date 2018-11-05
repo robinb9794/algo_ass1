@@ -16,8 +16,8 @@ public class PixelCoordinator {
 	public static void setSourcePixels(int[] pixels) {
 		for(int i = 0; i < viewModel.getScreenWidth(); i++) {
 			for(int j = 0; j < viewModel.getScreenHeight(); j++) {
-				int index = j * viewModel.getScreenWidth() + i;
-				viewModel.getSourcePixels()[index] = pixels[index];
+				int index = getPixelIndex(i, j);
+				setSingleSourcePixel(index, pixels[index]);
 			}
 		}
 	}
@@ -25,8 +25,18 @@ public class PixelCoordinator {
 	public static void setTargetPixels(int[] pixels) {
 		for(int i = 0; i < viewModel.getScreenWidth(); i++) {
 			for(int j = 0; j < viewModel.getScreenHeight(); j++) {
-				int index = j * viewModel.getScreenWidth() + i;
-				viewModel.getTargetPixels()[index] = pixels[index];
+				int index = getPixelIndex(i, j);
+				setSingleTargetPixel(index, pixels[index]);
+			}
+		}
+	}
+	
+	public static void setSourceAndTargetPixels(int[] pixels) {
+		for(int i = 0; i < viewModel.getScreenWidth(); i++) {
+			for(int j = 0; j < viewModel.getScreenHeight(); j++) {
+				int index = getPixelIndex(i, j);
+				setSingleSourcePixel(index, pixels[index]);
+				setSingleTargetPixel(index, pixels[index]);
 			}
 		}
 	}
@@ -38,8 +48,8 @@ public class PixelCoordinator {
 	public static void resetSourcePixels() {
 		for(int i = 0; i < viewModel.getScreenWidth(); i++) {
 			for(int j = 0; j < viewModel.getScreenHeight(); j++) {
-				int index = j * viewModel.getScreenWidth() + i;
-				viewModel.getSourcePixels()[index] = 0;
+				int index = getPixelIndex(i, j);
+				setSingleSourcePixel(index, 0);
 			}
 		}
 	}
@@ -47,14 +57,22 @@ public class PixelCoordinator {
 	public static void resetTargetPixels() {
 		for(int i = 0; i < viewModel.getScreenWidth(); i++) {
 			for(int j = 0; j < viewModel.getScreenHeight(); j++) {
-				int index = j * viewModel.getScreenWidth() + i;
-				viewModel.getTargetPixels()[index] = 0;
+				int index = getPixelIndex(i, j);
+				setSingleTargetPixel(index, 0);
 			}
 		}
 	}
 	
 	public static int getSingleSourcePixel(int index) {
 		return viewModel.getSourcePixels()[index];
+	}
+	
+	public static int getSingleTargetPixel(int index) {
+		return viewModel.getTargetPixels()[index];
+	}
+	
+	public static void setSingleSourcePixel(int index, int value) {
+		viewModel.getSourcePixels()[index] = value;
 	}
 	
 	public static void setSingleTargetPixel(int index, int value) {

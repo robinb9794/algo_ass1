@@ -44,7 +44,7 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 			public void actionPerformed(ActionEvent e) {
 				int translateX = -MorphValues.TRANSLATE_X;
 				int translateY = 0;
-				System.out.println("translateX: " + translateX);
+				viewModel.upateSelectionCenter(translateX, translateY);
 				setTranslationMatrix(translateX, translateY);
 				morph();
 			}
@@ -55,7 +55,7 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 			public void actionPerformed(ActionEvent e) {
 				int translateX = MorphValues.TRANSLATE_X;
 				int translateY = 0;
-				System.out.println("translateX: " + translateX);
+				viewModel.upateSelectionCenter(translateX, translateY);
 				setTranslationMatrix(translateX, translateY);
 				morph();
 			}
@@ -66,7 +66,6 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 			public void actionPerformed(ActionEvent e) {
 				int translateX = 0;
 				int translateY = -MorphValues.TRANSLATE_Y;
-				System.out.println("translateY: " + translateY);
 				setTranslationMatrix(translateX, translateY);
 				morph();
 			}
@@ -77,7 +76,7 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 			public void actionPerformed(ActionEvent e) {
 				int translateX = 0;
 				int translateY = MorphValues.TRANSLATE_Y;
-				System.out.println("translateY: " + translateY);
+				viewModel.upateSelectionCenter(translateX, translateY);
 				setTranslationMatrix(translateX, translateY);
 				morph();
 			}

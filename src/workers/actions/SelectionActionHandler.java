@@ -24,7 +24,7 @@ public class SelectionActionHandler extends SuperUserInteractionHandler{
 	private static boolean userHasSelectedTwoImages() {
 		return viewModel.getSelectedImages().size() == 2;
 	}	
-		
+
 	private static void addMouseMotionListenerToScreen() {
 		viewModel.getScreen().addCustomMouseMotionListener(new MouseMotionAdapter() {
 
@@ -55,7 +55,9 @@ public class SelectionActionHandler extends SuperUserInteractionHandler{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				viewModel.setSelectionEndPoint(e.getX(), e.getY());
-				enableOrDisableButtonsAfterSelection(true);
+				viewModel.setSelectionCenter();
+				enableOrDisableButtonsMorphButtons(true);
+				blockImageBar();
 			}
 			
 		});

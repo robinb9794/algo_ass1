@@ -5,7 +5,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public interface ImageDisplay extends GUIElement{
-	void drawImage();
 	int getScreenWidth();
 	int getScreenHeight();
 	void addCustomMouseMotionListener(MouseMotionListener mouseMotionLilstener);

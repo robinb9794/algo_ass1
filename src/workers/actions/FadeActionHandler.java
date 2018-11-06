@@ -1,13 +1,15 @@
 package workers.actions;
 
 import models.LoadedImage;
+import models.Mode;
 import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
 
 public class FadeActionHandler extends SuperUserInteractionHandler{
 	public static void handle() {
 		if(userHasSelectedImagesToFade()) {
-			resetScreenListener();
+			setCurrentMode(Mode.FADING);
+			resetScreenListeners();
 			disableAllButtonsExceptOf("Stop");
 			new Thread() {
 				@Override

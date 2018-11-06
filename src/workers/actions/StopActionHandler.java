@@ -10,7 +10,7 @@ import workers.SuperUserInteractionHandler;
 public class StopActionHandler extends SuperUserInteractionHandler{
 	public static void handle() {
 		isFading = false;
-		resetScreenListener();
+		resetScreenListeners();
 		enableAndDisableButtons();
 		resetDisplayedImage();
 	}
@@ -27,6 +27,12 @@ public class StopActionHandler extends SuperUserInteractionHandler{
 				button.enableButton(true);
 				break;
 			case "Lens":
+				button.enableButton(true);
+				break;
+			case "Lines":
+				button.enableButton(true);
+				break;
+			case "Circles":
 				button.enableButton(true);
 				break;
 			default:

@@ -4,16 +4,14 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.Map.Entry;
 
-import interfaces.buttons.ButtonField;
 import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
 
 public class SelectionActionHandler extends SuperUserInteractionHandler{	
 	public static void handle() {
 		if(userHasSelectedTwoImages()) {
-			resetScreenListener();
+			resetScreenListeners();
 			addMouseMotionListenerToScreen();
 			addMouseListenerToScreen();
 		}
@@ -27,21 +25,18 @@ public class SelectionActionHandler extends SuperUserInteractionHandler{
 
 	private static void addMouseMotionListenerToScreen() {
 		viewModel.getScreen().addCustomMouseMotionListener(new MouseMotionAdapter() {
-
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				viewModel.setSelectionEndPoint(e.getX(), e.getY());
 				PixelCoordinator.setTargetPixels(viewModel.getSourcePixels());
 				select();
 				gui.reloadScreen();
-			}
-			
+			}			
 		});
 	}
 	
 	private static void addMouseListenerToScreen() {
-		viewModel.getScreen().addCustomMouseListener(new MouseAdapter() {		
-
+		viewModel.getScreen().addCustomMouseListener(new MouseAdapter() {	
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				viewModel.getScreen().setCustomCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
@@ -57,17 +52,17 @@ public class SelectionActionHandler extends SuperUserInteractionHandler{
 				viewModel.setSelectionEndPoint(e.getX(), e.getY());
 				viewModel.setSelectionCenter();
 				enableOrDisableButtonsMorphButtons(true);
+				enableSingleButton("Reset");
 				blockImageBar();
-			}
-			
+			}			
 		});
 	}
 	
-	public static void select() {
-		int selectionStartX = getStartX();
-		int selectionEndX= getEndX();
-		int selectionStartY = getStartY();
-		int selectionEndY = getEndY();
+	private static void select() {
+		int selectionStartX = getSelectionStartX();
+		int selectionEndX= getSelectionEndX();
+		int selectionStartY = getSelectionStartY();
+		int selectionEndY = getSelectionEndY();
 		for(int i = selectionStartX; i <= selectionEndX; i++) {
 			for(int j = selectionStartY; j <= selectionEndY; j++) {
 				if(pixelIsOnSelectionLine(i, j, selectionStartX, selectionEndX, selectionStartY, selectionEndY)) {

@@ -12,6 +12,7 @@ import javax.swing.JMenuBar;
 import interfaces.GUIElement;
 import interfaces.View;
 import models.ViewModel;
+import workers.SuperUserInteractionHandler;
 
 public class GUI extends JFrame implements View{
 	private ViewModel viewModel;
@@ -30,6 +31,7 @@ public class GUI extends JFrame implements View{
 			@Override
 			public void windowClosing(WindowEvent we) {
 				viewModel.setUserHasClosedGUI(true);
+				SuperUserInteractionHandler.closeColorWindow();
 				dispose();
 			}
 		});

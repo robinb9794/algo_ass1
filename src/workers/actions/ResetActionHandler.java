@@ -1,19 +1,21 @@
 package workers.actions;
 
 import models.LoadedImage;
+import models.Mode;
 import models.math.Matrix;
 import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
 
 public class ResetActionHandler extends SuperUserInteractionHandler{
 	public static void handle() {
+		setCurrentMode(null);
 		enableImageBar();
 		resetSelectionPoints();
 		resetDisplayedImage();
 		resetMatrix();
 		enableOrDisableButtonsMorphButtons(false);
 		disableAndEnableButtons();
-		resetScreenListener();
+		resetScreenListeners();
 	}
 	
 	private static void resetSelectionPoints() {
@@ -35,8 +37,6 @@ public class ResetActionHandler extends SuperUserInteractionHandler{
 	private static void disableAndEnableButtons() {
 		disableSingleButton("Reset");
 		disableSingleButton("Save");
-		enableSingleButton("Selection");
-		enableSingleButton("Fade");
-		enableSingleButton("Lens");
+		disableSingleButton("Stop");
 	}
 }

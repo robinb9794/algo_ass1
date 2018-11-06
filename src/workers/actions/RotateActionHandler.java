@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import gui.elements.dialogs.RotateWindow;
+import models.Mode;
 import models.MorphValues;
 import models.math.Matrix;
 import workers.PixelCoordinator;
@@ -15,7 +16,8 @@ public class RotateActionHandler extends SuperUserInteractionHandler{
 	private static RotateWindow rotateWindow;
 	
 	public static void handle() {
-		resetScreenListener();
+		setCurrentMode(Mode.MORPHING);
+		resetScreenListeners();
 		initDialog();
 	}
 	

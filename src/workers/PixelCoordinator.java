@@ -63,6 +63,10 @@ public class PixelCoordinator {
 		}
 	}
 	
+	public static boolean pixelIndexIsInScreenArea(int index) {
+		return index >= 0 && index <= viewModel.getScreenWidth() * viewModel.getScreenHeight();
+	}
+	
 	public static int getSingleSourcePixel(int index) {
 		return viewModel.getSourcePixels()[index];
 	}

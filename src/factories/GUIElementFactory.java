@@ -2,12 +2,12 @@ package factories;
 
 import gui.elements.LoadingWindow;
 import gui.elements.Screen;
-import gui.elements.bar.ClickableImage;
-import gui.elements.bar.ImageField;
-import gui.elements.bar.ImageScroller;
 import gui.elements.containers.ButtonContainer;
 import gui.elements.containers.ImageContainer;
 import gui.elements.containers.MenuItemContainer;
+import gui.elements.imagebar.ClickableImage;
+import gui.elements.imagebar.ImageField;
+import gui.elements.imagebar.ImageScroller;
 import gui.elements.menu.ChooseImagesItem;
 import gui.elements.menu.CreateHistogramItem;
 import gui.elements.menu.ImageChooser;

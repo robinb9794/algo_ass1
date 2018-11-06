@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import gui.elements.dialogs.TranslateWindow;
+import models.Mode;
 import models.MorphValues;
 import models.math.Matrix;
 import workers.SuperUserInteractionHandler;
@@ -14,7 +15,8 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 	private static TranslateWindow translateWindow;
 	
 	public static void handle() {
-		resetScreenListener();
+		setCurrentMode(Mode.MORPHING);
+		resetScreenListeners();
 		initDialog();
 	}
 	

@@ -1,4 +1,4 @@
-package gui.elements.bar;
+package gui.elements.imagebar;
 
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;

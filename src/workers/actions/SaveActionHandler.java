@@ -15,7 +15,9 @@ public class SaveActionHandler extends SuperUserInteractionHandler{
 		BufferedImage imageFromTargetArray = getImageFromIntArray();
 		File tmp = createTmpFile(imageFromTargetArray);
 		ImageContainerManager.handleImage(tmp);
-		addImageFromTargetArrayToImageBar();	
+		ImageContainerManager.reloadImageBar();
+		if(userIsMorphing())
+			ImageContainerManager.blockImageBar();
 		deleteTmpFile(tmp);
 		showInfoDialog("Success!", "Successfully saved image.");
 	}
@@ -36,11 +38,6 @@ public class SaveActionHandler extends SuperUserInteractionHandler{
 			ex.printStackTrace();
 		}
 		return outputFile;
-	}
-	
-	private static void addImageFromTargetArrayToImageBar() {
-		ImageContainerManager.reloadImageBar();
-		ImageContainerManager.blockImageBar();
 	}
 	
 	private static void deleteTmpFile(File tmp) {

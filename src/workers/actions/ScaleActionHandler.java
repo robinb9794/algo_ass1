@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import gui.elements.dialogs.ScaleWindow;
+import models.Mode;
 import models.MorphValues;
 import models.math.Matrix;
 import workers.PixelCoordinator;
@@ -15,7 +16,8 @@ public class ScaleActionHandler extends SuperUserInteractionHandler {
 	private static ScaleWindow scaleWindow;
 	
 	public static void handle() {
-		resetScreenListener();
+		setCurrentMode(Mode.MORPHING);
+		resetScreenListeners();
 		initDialog();
 	}
 	

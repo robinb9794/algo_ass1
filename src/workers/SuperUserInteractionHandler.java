@@ -4,9 +4,11 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
+import gui.elements.dialogs.ChooseColorsWindow;
 import interfaces.View;
 import interfaces.buttons.ButtonField;
 import models.LoadedImage;
+import models.Mode;
 import models.ViewModel;
 import models.math.Matrix;
 import models.math.Vector;
@@ -16,6 +18,8 @@ public class SuperUserInteractionHandler {
 	protected static View gui;
 	
 	protected static boolean isFading;
+	
+	protected static ChooseColorsWindow colorWindow;
 		
 	public static void init(ViewModel viewModel, View gui) {
 		SuperUserInteractionHandler.viewModel = viewModel;
@@ -31,12 +35,22 @@ public class SuperUserInteractionHandler {
 		JOptionPane.showMessageDialog(null, message, "Error!", JOptionPane.ERROR_MESSAGE);
 	}
 	
+	protected static void setCurrentMode(Mode currentMode) {
+		viewModel.setCurrentMode(currentMode);
+	}
+	
+	protected static boolean userIsMorphing() {
+		return viewModel.getCurrentMode() == Mode.MORPHING;
+	}
+	
 	protected static void enableSingleButton(String value) {
 		for(Entry<ButtonField, String> entry : viewModel.getButtons().entrySet()) {
 			ButtonField button = entry.getKey();
 			String buttonValue = entry.getValue();
-		    if(buttonValue.equals(value))
+		    if(buttonValue.equals(value)) {
 		    	button.enableButton(true);
+		    	break;
+		    }
 		}
 	}
 	
@@ -44,8 +58,10 @@ public class SuperUserInteractionHandler {
 		for(Entry<ButtonField, String> entry : viewModel.getButtons().entrySet()) {
 			ButtonField button = entry.getKey();
 			String buttonValue = entry.getValue();
-		    if(buttonValue.equals(value))
+		    if(buttonValue.equals(value)) {
 		    	button.enableButton(false);
+		    	break;
+		    }
 		}
 	}
 	
@@ -77,26 +93,13 @@ public class SuperUserInteractionHandler {
 		    case "Shear":
 		    	button.enableButton(enable);
 		    	break;
-		    case "Lines":
-		    	button.enableButton(enable);
-		    	break;
-		    case "Circles":
-		    	button.enableButton(enable);
-		    	break;
-		    case "Reset":
-		    	button.enableButton(enable);
-		    	break;
-		    case "Save":
-		    	button.enableButton(enable);
-		    	break;
 	    	default:
-	    		button.enableButton(false);
-	    		break;
+	    		button.enableButton(!enable);
 		    }
 		}
 	}
 	
-	protected static void resetScreenListener() {
+	protected static void resetScreenListeners() {
 		viewModel.getScreen().resetMouseActions();
 	}
 	
@@ -130,22 +133,27 @@ public class SuperUserInteractionHandler {
 	}
 	
 	private static boolean pixelIsInSelectionArea(Vector vector) {
-		return vector.getX() >= getStartX() && vector.getX() <= getEndX() && vector.getY() >= getStartY() && vector.getY() <= getEndY();
+		return vector.getX() >= getSelectionStartX() && vector.getX() <= getSelectionEndX() && vector.getY() >= getSelectionStartY() && vector.getY() <= getSelectionEndY();
 	}
 	
-	protected static int getStartX() {
+	protected static int getSelectionStartX() {
 		return Math.min((int) viewModel.getSelectionStartPoint().getX(), (int) viewModel.getSelectionEndPoint().getX());
 	}
 	
-	protected static int getEndX() {
+	protected static int getSelectionEndX() {
 		return Math.max((int) viewModel.getSelectionStartPoint().getX(), (int) viewModel.getSelectionEndPoint().getX());
 	}
 	
-	protected static int getStartY() {
+	protected static int getSelectionStartY() {
 		return Math.min((int) viewModel.getSelectionStartPoint().getY(), (int) viewModel.getSelectionEndPoint().getY());
 	}
 	
-	protected static int getEndY() {
+	protected static int getSelectionEndY() {
 		return Math.max((int) viewModel.getSelectionStartPoint().getY(), (int) viewModel.getSelectionEndPoint().getY());
+	}
+	
+	public static void closeColorWindow() {
+		if(colorWindow != null)
+			colorWindow.dispose();
 	}
 }

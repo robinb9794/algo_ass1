@@ -4,14 +4,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
 import models.LoadedImage;
+import models.Mode;
 import workers.PixelCoordinator;
 import workers.SuperUserInteractionHandler;
 
 public class LensActionHandler extends SuperUserInteractionHandler {
 	public static void handle() {
 		if(userHasSelectedImagesToLens()) {
+			setCurrentMode(Mode.LENSING);
 			disableAllButtonsExceptOf("Reset");
-			resetScreenListener();
+			resetScreenListeners();
 			addMouseMotionListenerToScreen();
 		}else
 			showErrorDialog("Please select exactly two images.");

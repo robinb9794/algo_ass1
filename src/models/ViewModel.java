@@ -1,5 +1,6 @@
 package models;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.MemoryImageSource;
@@ -39,7 +40,12 @@ public class ViewModel {
 	private Point selectionStartPoint, selectionEndPoint;
 	private Point selectionCenter;
 	
+	private Mode currentMode;
+	
 	private Matrix morphMatrix;
+	
+	private Color firstColor, secondColor;
+	private Point lineStartPoint, lineEndPoint;
 	
 	public ViewModel(String guiTitle, int guiWidth, int guiHeight) {
 		this.guiTitle = guiTitle;
@@ -54,6 +60,10 @@ public class ViewModel {
 		this.selectionEndPoint = new Point();
 		this.selectionCenter = new Point();
 		this.morphMatrix = new Matrix();
+		this.firstColor = new Color(0);
+		this.secondColor = new Color(0);
+		this.lineStartPoint = new Point();
+		this.lineEndPoint = new Point();
 	}
 	
 	public String getGUITitle() {
@@ -225,11 +235,56 @@ public class ViewModel {
 		this.selectionCenter = new Point();
 	}
 	
+	public Mode getCurrentMode() {
+		return this.currentMode;
+	}
+	
+	public void setCurrentMode(Mode currentMode) {
+		this.currentMode = currentMode;
+	}
+	
 	public Matrix getMorphMatrix() {
 		return this.morphMatrix;
 	}
 	
 	public void setMorphMatrix(Matrix morphMatrix) {
 		this.morphMatrix = morphMatrix;
+	}
+	
+	public Color getFirstColor() {
+		return this.firstColor;
+	}
+	
+	public void setFirstColor(Color firstColor) {
+		this.firstColor = firstColor;
+	}
+	
+	public Color getSecondColor() {
+		return this.secondColor;
+	}
+	
+	public void setSecondColor(Color secondColor) {
+		this.secondColor = secondColor;
+	}
+	
+	public Point getLineStartPoint() {
+		return this.lineStartPoint;
+	}
+	
+	public void setLineStartPoint(Point lineStartPoint) {
+		this.lineStartPoint = lineStartPoint;
+	}
+	
+	public Point getLineEndPoint() {
+		return this.lineEndPoint;
+	}
+	
+	public void setLineEndPoint(Point lineEndPoint) {
+		this.lineEndPoint = lineEndPoint;
+	}
+	
+	public void resetLinePoints() {
+		this.lineStartPoint = new Point();
+		this.lineEndPoint = new Point();
 	}
 }

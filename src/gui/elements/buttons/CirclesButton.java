@@ -10,7 +10,7 @@ public class CirclesButton extends SuperButton{
 	@Override
 	public void init() {
 		setToolTipText("Draw circles");
-		setEnabled(false);
+		setEnabled(true);
 		setIconFromUrl("https://cdn4.iconfinder.com/data/icons/religion-6/53/unification-one-three-circles-512.png");
 	}
 

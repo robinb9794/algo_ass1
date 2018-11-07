@@ -63,7 +63,7 @@ public class Screen extends JComponent implements ImageDisplay{
 	}
 
 	@Override
-	public void resetMouseActions() {
+	public void resetListeners() {
 		removeMouseListener(this.currentMouseListener);
 		removeMouseMotionListener(this.currentMouseMotionListener);
 		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

@@ -4,7 +4,6 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
-import gui.elements.dialogs.ChooseColorsWindow;
 import interfaces.View;
 import interfaces.buttons.ButtonField;
 import models.LoadedImage;
@@ -17,9 +16,7 @@ public class SuperUserInteractionHandler {
 	protected static ViewModel viewModel;
 	protected static View gui;
 	
-	protected static boolean isFading;
-	
-	protected static ChooseColorsWindow colorWindow;
+	protected static boolean isFading;	
 		
 	public static void init(ViewModel viewModel, View gui) {
 		SuperUserInteractionHandler.viewModel = viewModel;
@@ -100,7 +97,7 @@ public class SuperUserInteractionHandler {
 	}
 	
 	protected static void resetScreenListeners() {
-		viewModel.getScreen().resetMouseActions();
+		viewModel.getScreen().resetListeners();
 	}
 	
 	protected static void blockImageBar() {
@@ -150,10 +147,5 @@ public class SuperUserInteractionHandler {
 	
 	protected static int getSelectionEndY() {
 		return Math.max((int) viewModel.getSelectionStartPoint().getY(), (int) viewModel.getSelectionEndPoint().getY());
-	}
-	
-	public static void closeColorWindow() {
-		if(colorWindow != null)
-			colorWindow.dispose();
-	}
+	}	
 }

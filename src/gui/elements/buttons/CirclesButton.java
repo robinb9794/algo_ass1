@@ -2,6 +2,8 @@ package gui.elements.buttons;
 
 import java.awt.event.ActionEvent;
 
+import workers.actions.CirclesActionHandler;
+
 public class CirclesButton extends SuperButton{
 	public CirclesButton() {
 		super();
@@ -16,7 +18,6 @@ public class CirclesButton extends SuperButton{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		CirclesActionHandler.handle();
 	}
-
 }

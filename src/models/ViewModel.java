@@ -45,7 +45,7 @@ public class ViewModel {
 	private Matrix morphMatrix;
 	
 	private Color firstColor, secondColor;
-	private Point lineStartPoint, lineEndPoint;
+	private Point drawingStartPoint, drawingEndPoint;
 	
 	public ViewModel(String guiTitle, int guiWidth, int guiHeight) {
 		this.guiTitle = guiTitle;
@@ -62,8 +62,8 @@ public class ViewModel {
 		this.morphMatrix = new Matrix();
 		this.firstColor = new Color(0);
 		this.secondColor = new Color(0);
-		this.lineStartPoint = new Point();
-		this.lineEndPoint = new Point();
+		this.drawingStartPoint = new Point();
+		this.drawingEndPoint = new Point();
 	}
 	
 	public String getGUITitle() {
@@ -166,6 +166,7 @@ public class ViewModel {
 		}else {
 			PixelCoordinator.resetSourcePixels();
 			PixelCoordinator.resetTargetPixels();
+			screen.resetListeners();
 		}
 	}
 	
@@ -267,24 +268,24 @@ public class ViewModel {
 		this.secondColor = secondColor;
 	}
 	
-	public Point getLineStartPoint() {
-		return this.lineStartPoint;
+	public Point getDrawingStartPoint() {
+		return this.drawingStartPoint;
 	}
 	
-	public void setLineStartPoint(Point lineStartPoint) {
-		this.lineStartPoint = lineStartPoint;
+	public void setDrawingStartPoint(Point drawingStartPoint) {
+		this.drawingStartPoint = drawingStartPoint;
 	}
 	
-	public Point getLineEndPoint() {
-		return this.lineEndPoint;
+	public Point getDrawingEndPoint() {
+		return this.drawingEndPoint;
 	}
 	
-	public void setLineEndPoint(Point lineEndPoint) {
-		this.lineEndPoint = lineEndPoint;
+	public void setDrawingEndPoint(Point drawingEndPoint) {
+		this.drawingEndPoint = drawingEndPoint;
 	}
 	
-	public void resetLinePoints() {
-		this.lineStartPoint = new Point();
-		this.lineEndPoint = new Point();
+	public void resetDrawingPoints() {
+		this.drawingStartPoint = new Point();
+		this.drawingEndPoint = new Point();
 	}
 }

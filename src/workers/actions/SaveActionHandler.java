@@ -19,7 +19,7 @@ public class SaveActionHandler extends SuperUserInteractionHandler{
 		if(userIsMorphing())
 			ImageContainerManager.blockImageBar();
 		deleteTmpFile(tmp);
-		showInfoDialog("Success!", "Successfully saved image.");
+		showInfoDialog("Success!", "Image was successfully added to the bar.");
 	}
 	
 	private static BufferedImage getImageFromIntArray() {

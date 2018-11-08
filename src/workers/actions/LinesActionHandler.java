@@ -98,8 +98,9 @@ public class LinesActionHandler extends DrawingInteractionInterlayer {
 		int y = y0;
 		int i = 0;
 		
-		while(lineIsStillInScreenArea(x, y) && i <= longD) {
-			int index = PixelCoordinator.getPixelIndex(x, y);
+		int index = PixelCoordinator.getPixelIndex(x, y);
+		
+		while(PixelCoordinator.pixelIndexIsInScreenArea(index) && i <= longD) {
 			final int P = 100 * i / longD;
 			final int MIXED_COLOR = PixelCoordinator.colorShuffle(FIRST_COLOR, SECOND_COLOR, P);
 			PixelCoordinator.setSingleTargetPixel(index, MIXED_COLOR);
@@ -112,10 +113,7 @@ public class LinesActionHandler extends DrawingInteractionInterlayer {
 				y += incYshort;
 			}
 			++i;
+			index = PixelCoordinator.getPixelIndex(x, y);
 		}
-	}
-	
-	private static boolean lineIsStillInScreenArea(int x, int y) {
-		return x >= 0 && x <= viewModel.getScreenWidth() - 1 && y >= 0 && y <= viewModel.getScreenHeight() - 1;
 	}
 }

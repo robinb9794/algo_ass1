@@ -222,7 +222,7 @@ public class ViewModel {
 	
 	public void upateSelectionCenter(int x, int y) {
 		int centerX = (int) this.selectionCenter.getX() + x;
-		int centerY = (int) this.selectionCenter.getY();
+		int centerY = (int) this.selectionCenter.getY() + y;
 		this.selectionCenter.setLocation(centerX, centerY);
 	}
 	

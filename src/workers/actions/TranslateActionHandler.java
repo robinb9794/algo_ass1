@@ -68,6 +68,7 @@ public class TranslateActionHandler extends SuperUserInteractionHandler{
 			public void actionPerformed(ActionEvent e) {
 				int translateX = 0;
 				int translateY = -MorphValues.TRANSLATE_Y;
+				viewModel.upateSelectionCenter(translateX, translateY);
 				setTranslationMatrix(translateX, translateY);
 				morph();
 			}

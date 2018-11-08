@@ -17,8 +17,10 @@ public class CirclesActionHandler extends DrawingInteractionInterlayer{
 		if (userHasSelectedAtLeastOneImage()) {
 			if (colorWindowIsAlreadyInitialized())
 				colorWindow.setVisible(true);
-			else
+			else {
+				showInfoDialog("Help?", "Keep right mouse button pressed to fill circles.");
 				initColorWindow();
+			}
 			if (userIsMorphing())
 				PixelCoordinator.setSourceAndTargetPixels(viewModel.getTargetPixels());
 			setCurrentMode(Mode.DRAWING);
@@ -85,7 +87,7 @@ public class CirclesActionHandler extends DrawingInteractionInterlayer{
 		int dyx = -2 * RADIUS + 3;
 		
 		while(y <= x && circleIsStillInScreenArea(x0, y0, RADIUS)) {			
-			setCirclePixelsAndFillIfnecessary(x0, y0, x, y);
+			setCirclePixelsAndFillIfNecessary(x0, y0, x, y);
 			++y;
 			dy += 2;
 			dyx += 2;
@@ -103,7 +105,7 @@ public class CirclesActionHandler extends DrawingInteractionInterlayer{
 		return x0 - r >= 0 && x0 + r <= viewModel.getScreenWidth() && y0 - r >= 0 && y0 + r <= viewModel.getScreenHeight();
 	}
 	
-	private static void setCirclePixelsAndFillIfnecessary(int x0, int y0, int x, int y) {
+	private static void setCirclePixelsAndFillIfNecessary(int x0, int y0, int x, int y) {
 		int p0 = PixelCoordinator.getPixelIndex(x0 + x, y0 + y);
 		int p1 = PixelCoordinator.getPixelIndex(x0 - x, y0 + y);
 		int p2 = PixelCoordinator.getPixelIndex(x0 + x, y0 - y);
@@ -152,11 +154,12 @@ public class CirclesActionHandler extends DrawingInteractionInterlayer{
 		final int SECOND_COLOR = viewModel.getSecondColor().getRGB();
 		
 		for(int i = startX; i <= endX; i++) {
-			final int P = 100 * i / endX;
-			final int MIXED_COLOR = PixelCoordinator.colorShuffle(FIRST_COLOR, SECOND_COLOR, P);
-			for(int j = startY; j <= endY; j++) {				
+			final int P = Math.round(100 * i / endX);
+			final int MIXED_COLOR = 0xff000000 | PixelCoordinator.colorShuffle(FIRST_COLOR, SECOND_COLOR, P);
+			for(int j = startY; j <= endY; j++) {	
 				int index = PixelCoordinator.getPixelIndex(i, j);
-				PixelCoordinator.setSingleTargetPixel(index, MIXED_COLOR);
+				if(PixelCoordinator.pixelIndexIsInScreenArea(index))
+					PixelCoordinator.setSingleTargetPixel(index, MIXED_COLOR);
 			}
 		}
 	}
